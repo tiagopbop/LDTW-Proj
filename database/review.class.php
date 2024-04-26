@@ -1,12 +1,6 @@
 <?php
     declare(strict_types = 1);
 
-    idReview INTEGER PRIMARY KEY NOT NULL,
-    FOREIGN KEY (userId) REFERENCES user(userId),
-    FOREIGN KEY (vehicleId) REFERENCES vehicle(vehicleId),
-    rating INTEGER NOT NULL CHECK(rating > 0 AND rating < 6),
-    comment NVARCHAR(300),
-    CONSTRAINT unique_user UNIQUE(userId, vehicleId)
 
     class Review {
         public int $idReview;

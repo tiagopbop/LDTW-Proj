@@ -83,7 +83,6 @@
 
             $vehicles = array();
             while ($vehicle = $stmt->fetch()) {
-                $vehicles[] = new Vehicle(
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
