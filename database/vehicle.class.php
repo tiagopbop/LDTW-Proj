@@ -108,7 +108,6 @@
 
             $vehicles = array();
             while ($vehicle = $stmt->fetch()) {
-                $vehicles[] = new Vehicle(
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
@@ -133,7 +132,6 @@
 
             $vehicles = array();
             while ($vehicle = $stmt->fetch()) {
-                $vehicles[] = new Vehicle(
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
@@ -154,7 +152,7 @@
         static function getCategoryVehicles(PDO $db, int $id) : array {
             $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype 
                                   FROM Vehicle
-                                  WHERE categoryId = ?')
+                                  WHERE categoryId = ?');
             $stmt->execute(array($id));
 
             $vehicles = [];

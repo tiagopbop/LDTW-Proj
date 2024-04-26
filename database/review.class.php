@@ -30,9 +30,10 @@
                     $review['userId'],
                     $review['rating'],
                     $review['comment']
-                )
+                );
             }
+            return $reviews;
         }
-    }
-
+        }
+        
 ?>

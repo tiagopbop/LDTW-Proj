@@ -45,7 +45,7 @@
             } else return null;
         }
 
-        static funtion getUser (PDO $db, int $id) : User {
+        static function getUser (PDO $db, int $id) : ?User {
             $stmt = $db->prepare(' SELECT userId, userName, pass, email, is_admin, creattion_date
             FROM User
             WHERE userId = ? ');
