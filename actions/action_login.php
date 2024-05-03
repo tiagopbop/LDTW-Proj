@@ -13,7 +13,7 @@
 
   if ($customer) {
     $session->setId($user->userId);
-    $session->setUserame($user->userName);
+    $session->setUsername($user->userName);
     $session->setRole($user->is_admin)
     $session->addMessage('success', 'Login successful!');
   } else {
