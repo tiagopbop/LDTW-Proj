@@ -14,7 +14,7 @@
         public int $fuelType;
     
 
-        public function __construct(int $vehicleId, int $userId, int $categoryId, int $modelId, int $colorId, int $price, int $condition, int $kilometer, int $fuelType) {
+        public function __construct(int $vehicleId, int $userId, int $categoryId, int $brandId, int $modelId, int $colorId, int $price, int $condition, int $kilometers, int $fuelType) {
             $this->vehicleId = $vehicleId;
             $this->userId = $userId;
             $this->categoryId = $categoryId;
@@ -25,6 +25,27 @@
             $this->condition = $condition;
             $this->kilometers = $kilometers;
             $this->fuelType = $fuelType;
+        }
+
+        static function getVehicle(PDO $db, int $id) {
+            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype
+            FROM vehicle WHERE vehicleId = ?');
+            $stmt->execute(array($id));
+
+            $vehicle = $stmt->fetch();
+
+            return new Vehicle(
+                $vehicle['vehicleId'],
+                $vehicle['userId'],
+                $vehicle['categoryId'],
+                $vehicle['brandId'],
+                $vehicle['modelId'],
+                $vehicle['colorId'],
+                $vehicle['price'],
+                $vehicle['condition'],
+                $vehicle['kilometers'],
+                $vehicle['fuelType']
+            );
         }
 
         public function getRecentVehicles(PDO $db, int $count) : array {
@@ -173,6 +194,12 @@
             }
 
             return $vehicles;
+        }
+
+        static function getVehicleCount(PDO $db) {
+            $stmt = $db->query('SELECT COUNT(*) AS vehicleCount FROM vehicles');
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['vehicleCount'];
         }
     }
 ?>
