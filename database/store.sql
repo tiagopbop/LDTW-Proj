@@ -28,6 +28,12 @@ CREATE TABLE Brand(
     logoFilePath NVARCHAR(500) NOT NULL
 );
 
+CREATE TABLE Image(
+    FOREIGN KEY (vehicleId) REFERENCES Vehicle(vehicleId),
+    imageFilePath NVARCHAR(500) NOT NULL,
+    PRIMARY KEY(vehicleId, imageFilePath)
+);
+
 CREATE TABLE Category(
     categoryId INTEGER PRIMARY KEY NOT NULL,
     categoryName NVARCHAR(30) NOT NULL,
