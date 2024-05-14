@@ -11,7 +11,7 @@
 
   $user = user::getUserWithPassword($db, $_POST['email'], $_POST['username'], $_POST['password']);
 
-  if ($customer) {
+  if ($user) {
     $session->setId($user->userId);
     $session->setUsername($user->userName);
     $session->setRole($user->is_admin)
