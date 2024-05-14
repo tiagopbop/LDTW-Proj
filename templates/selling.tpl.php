@@ -84,7 +84,7 @@ function drawCreateListing(PDO $db) {
 
         
         <label for="kilometers">Kilometers:</label>
-        <input type="number" name="price" id="price" step="1" placeholder="Enter kilometers">
+        <input type="number" name="kilometers" id="kilometers" step="1" placeholder="Enter kilometers">
         <br>
         
 
