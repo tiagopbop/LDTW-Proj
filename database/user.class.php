@@ -8,30 +8,28 @@
         public string $pass;
         public string $email;
         public bool $is_admin;
-        public date $creation;
     
 
-        public function __construct(int $userId, string $userName, string $pass, string $email, bool $is_admin, date $creation) {
+        public function __construct(int $userId, string $userName, string $pass, string $email, bool $is_admin) {
             $this->userId = $userId;
             $this->userName = $userName;
             $this->pass = $pass;
             $this->email = $email;
             $this->is_admin = $is_admin;
-            $this->creation = $creation;
         }
 
         public function giveAdmin($db) {
             $stmt = $db->prepare('UPDATE User SET is_admin = 1 WHERE userId = ?');
 
-            $stmt->execute(array($this->is_admin, $this->UserId));
+            $stmt->execute(array($this->is_admin, $this->userId));
         }
 
-        static function getUserWithPassword(PDO $db, string $email, string $userName, string $pass) : ?Customer {
+        static function getUserWithPassword(PDO $db, string $email, string $userName, string $pass) : ?User {
             $stmt = $db->prepare(' SELECT userId, userName, pass, email, is_admin, creattion_date
             FROM User
             WHERE lower(email) = ? AND userName = ? AND pass = ? ');
   
-            $stmt->execute(array(strtolower($email), string($userName), sha1($password)));
+            $stmt->execute(array(strtolower($email), $userName, sha1($pass)));
     
             if ($user = $stmt->fetch()) {
                 return new User(

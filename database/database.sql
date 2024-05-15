@@ -2,13 +2,13 @@ PRAGMA foreign_keys = ON;
 
 
 -- Inserting 5 cases for User 'john_doe'
-INSERT INTO User (UserId, userName, pass, email, is_admin, creattion_date) 
+INSERT INTO User (UserId, userName, pass, email, is_admin) 
 VALUES 
-    (1,'john_doe', 'password123', 'john@example.com', 1, '2024-04-19'),
-    (2,'jane_smith', 'pass123', 'jane@example.com', 0, '2024-04-20'),
-    (3,'alex_brown', 'securepass', 'alex@example.com', 0, '2024-04-21'),
-    (4,'emma_davis', 'password', 'emma@example.com', 0, '2024-04-22'),
-    (5,'michael_wilson', 'p@$$w0rd', 'michael@example.com', 0, '2024-04-23');
+    (1,'john_doe', 'password123', 'john@example.com', 1),
+    (2,'jane_smith', 'pass123', 'jane@example.com', 0),
+    (3,'alex_brown', 'securepass', 'alex@example.com', 0),
+    (4,'emma_davis', 'password', 'emma@example.com', 0),
+    (5,'michael_wilson', 'p@$$w0rd', 'michael@example.com', 0);
 
 -- Inserting 5 cases for Brand 'Toyota'
 INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
