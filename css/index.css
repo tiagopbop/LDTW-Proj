@@ -1,0 +1,329 @@
+html {
+  overflow-y: scroll;
+  height: 190vh;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(15, 15, 15);
+}
+
+.logo {
+  width: 10vw;
+}
+
+header {
+  background-color: black;
+  font-family: 'Times New Roman', serif;
+  border-bottom: 0.5vh double rgb(190, 190, 190);
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  color: rgb(255, 255, 255);
+  font-size: 1vw;
+  text-align: center;
+  line-height: 4vh;
+  position: absolute;
+  height: 4.2vh;
+  top: 3vh;
+  border-width: 0.2vh;
+  border-style: solid;
+  border-color: white;
+}
+
+.home {
+  width: 12vw;
+  left: 13.75vw;
+}
+
+.website_logo input[type=text] {
+  position: absolute;
+  width: 35vw;
+  height: 3vh;
+  left: 30.5vw;
+  top: 2.35vh;
+  padding: 0.63vh;
+  margin-top: 0.72vh;
+  margin-right: 1vh;
+  border: none;
+  font-size: 1vw;
+  background-color: rgb(238, 238, 238);
+  border-radius: 0.2vh;
+}
+
+.register {
+  width: 6vw;
+  left: 90.5vw;
+}
+
+.login {
+  width: 6vw;
+  left: 82vw;
+}
+
+.messages {
+  width: 6vw;
+  left: 70.2vw;
+}
+
+.home:hover,.login:hover,.register:hover,.messages:hover {
+  background-color: rgba(61, 61, 61, 0.5);
+}
+
+.cart {
+  width: 2.1vw;
+  height: 3.8vh;
+  position: absolute;
+  top: 3vh;
+  left: 78vw;
+  padding: 0.2vh;
+}
+
+.unhovered {
+  border-width: 0.2vh;
+  border-style: dashed;
+  border-color: white;
+  z-index: 2;
+}
+
+.trans:hover + .unhovered { 
+  background-color: rgba(61, 61, 61, 0.5);
+}
+
+.vehicles {
+  width: 18.3vw;
+  height: 21vh;
+  border-radius: 0.6vh;
+  position: absolute;
+  top: 25vh;
+}
+
+.line {
+  width: 99vw;
+  height: 21vh;
+  position: absolute;
+  top: 15vh;
+  border-bottom: 0.2vh solid rgb(102, 102, 102);
+}
+
+.terrain {
+  left: 6.5vw;
+}
+
+.aquatic {
+  left: 40.7vw;
+}
+
+.aerial {
+  right: 6.5vw;
+}
+
+.decoration {
+  width: 18.3vw;
+  height: 21vh;
+  border-radius: 0.6vh;
+  position: absolute;
+  top: 21.8vh;
+  padding: 3.4vh;
+  border: 0.3vh solid rgb(102, 102, 102);
+}
+
+.terra {
+  left: 4.8vw;
+}
+
+.aqua {
+  left: 38.9vw;
+}
+
+.air {
+  right: 4.8vw;
+}
+
+.white {
+  background-color: white;
+  z-index: 2;
+}
+
+.car,.boat,.plane {
+  z-index: 3;
+}
+
+.trans {
+  background-color: transparent;
+  z-index: 4;
+}
+
+.trans:hover + .car {
+  animation-name: terrain-animation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.trans:hover + .boat {
+  animation-name: aquatic-animation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.trans:hover + .plane {
+  animation-name: aerial-animation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.wall {
+  z-index: 1;
+  position: absolute;
+  text-align: center;
+  top: 64vh;
+  left: 4vw;
+  height: 96vh;
+  width: 91.3vw;
+  border-radius: 0.8vh;
+  border-top: 0.5vh solid rgb(224, 224, 224);
+  background-color: rgb(27, 27, 27);
+}
+
+.trending {
+  word-spacing: 8vw;
+  margin: 7vh;
+  z-index: 2;
+}
+
+.items {
+  z-index: 3;
+  border-radius: 0.4vh;
+  border: 0.2vh solid rgb(27, 27, 27);
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  width: 22vw;
+  height: 36vh;
+}
+
+.items:hover {
+  padding: 0.25vh;
+  border: 0.25vh solid rgb(245, 245, 245);
+  transition-timing-function: ease-in;
+  transition-duration: 0.2s;
+}
+
+.pop {
+  transform: translatey(0px);
+  animation: float 4s ease-in-out infinite;
+
+  font-size: 1.2vw;
+  font-weight: bold;
+  letter-spacing: 0.2vh;
+  z-index: 4;
+  position: absolute;
+  width: 10vw;
+  height: 5.4vh;
+  border-radius: 0.5vh;
+  background-color: rgb(143, 143, 143);
+  border: 0.2vh solid white;
+  text-align: center;
+  padding: 1.2vh;
+}
+
+.popup {
+  border-radius: 0.5vh;
+  padding: 1.2vh;
+  z-index: 4;
+  font-weight: bold;
+  letter-spacing: 0.2vh;
+  font-size: 1.2vw;
+  width: 8vw;
+  height: 3.4vh;
+  border: 0.2vh solid white;
+  text-align: center;
+  background-color: rgb(224, 224, 224);
+  position: absolute;
+  top: 61vh;
+  left: 15vw;
+}
+
+.first {
+  top: 30vh;
+}
+
+.second {
+  top: 74vh;
+}
+
+.ad1,.ad4 {
+  left: 20vw;
+}
+
+.ad2,.ad5 {
+  left: 49.7vw;
+  animation-delay: 0.5s;
+}
+
+.ad3,.ad6 {
+  left: 79vw;
+  animation-delay: 1s;
+}
+
+footer {
+  position: absolute;
+  bottom: -90vh;
+  width: 99vw;
+  height: 8vh;
+  text-align: center;
+  font-size: 1.1vw;
+  color: white;
+  font-style: italic;
+  opacity: 40%;
+  background-color: rgb(29, 29, 29);
+}
+
+@keyframes terrain-animation {
+  from {
+    top: 25vh;
+    left: 6.5vw;
+  }
+  to {
+    top: 24.5vh;
+    left: 6.25vw;
+  }
+}
+
+@keyframes aquatic-animation {
+  from {
+    top: 25vh;
+    left: 40.7vw;
+  }
+  to {
+    top: 24.5vh;
+    left: 40.45vw;
+  }
+}
+
+@keyframes aerial-animation {
+  from {
+    top: 25vh;
+    right: 6.5vw;
+  }
+  to {
+    top: 24.5vh;
+    right: 6.75vw;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
