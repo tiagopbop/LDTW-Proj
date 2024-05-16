@@ -15,35 +15,19 @@
 function drawCreateListing(array $listing) { 
 ?>
 
-    <form action="../actions/action_edit_listing.php" method="post">
+<form action="../actions/action_edit_listing.php" method="post">
+    <label for="category">Select Category:</label>
+    <select name="category" id="category">
+        <?php foreach ($listing as $category): ?>
+            <option value="<?= $category['categoryId'] ?>">
+                <?= htmlentities($category['categoryName']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</form>
 
-        <label for="category">Select Category:</label>
-        <select name="category" id="category">
-            <option value="">-- Select Category --</option>
-            <?php foreach ($listing as $list): ?>
-                <option value="<?= $list['categoryId'] ?>"><?= $list['categoryName'] ?></option>
-            <?php endforeach; ?>
-        </select>
 
-
-        
-        <input type="submit" value="Submit">
-    </form>
-
-    <script>
-    document.getElementById("brand").addEventListener("change", function() {
-        var brandId = this.value;
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById("model").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.open("GET", "./utils/get_models.php?brandId=" + brandId, true); // Adjust the URL to point to your PHP file
-        xhr.send();
-    });
-    </script>
-
-<?php
-}
+<?php 
+} // Close the function drawCreateListing
 ?>
+
