@@ -1,25 +1,25 @@
 PRAGMA foreign_keys = ON;
-DROP TABLE  IF EXISTS User;
-DROP TABLE  IF EXISTS Brand;
-DROP TABLE  IF EXISTS Category;
-DROP TABLE  IF EXISTS Model;
-DROP TABLE  IF EXISTS Color;
-DROP TABLE  IF EXISTS Vehicle;
-DROP TABLE  IF EXISTS Wishlist;
-DROP TABLE  IF EXISTS Shopcar;
-DROP TABLE  IF EXISTS Trans;
-DROP TABLE  IF EXISTS Chat;
-DROP TABLE  IF EXISTS Msg;
-DROP TABLE  IF EXISTS Review;
 
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Brand;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Model;
+DROP TABLE IF EXISTS Color;
+DROP TABLE IF EXISTS Vehicle;
+DROP TABLE IF EXISTS Wishlist;
+DROP TABLE IF EXISTS Shopcar;
+DROP TABLE IF EXISTS Trans;
+DROP TABLE IF EXISTS Chat;
+DROP TABLE IF EXISTS Msg;
+DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS Images;
 
 CREATE TABLE User(
     UserId INTEGER PRIMARY KEY NOT NULL,
     userName NVARCHAR(100) NOT NULL,
     pass NVARCHAR(100) NOT NULL,
     email NVARCHAR(100) NOT NULL,
-    is_admin BOOLEAN NOT NULL,
-    creattion_date DATE NOT NULL
+    is_admin BOOLEAN NOT NULL
 );
 
 CREATE TABLE Brand(
@@ -28,20 +28,11 @@ CREATE TABLE Brand(
     logoFilePath NVARCHAR(500) NOT NULL
 );
 
-CREATE TABLE Image(
-    FOREIGN KEY (vehicleId) REFERENCES Vehicle(vehicleId),
-    imageFilePath NVARCHAR(500) NOT NULL,
-    PRIMARY KEY(vehicleId, imageFilePath)
-);
-
 CREATE TABLE Category(
     categoryId INTEGER PRIMARY KEY NOT NULL,
     categoryName NVARCHAR(30) NOT NULL,
     categoryFilePath TEXT NOT NULL
 );
-
-
-
 
 CREATE TABLE Model(
     BrandId INTEGER NOT NULL,
@@ -50,10 +41,12 @@ CREATE TABLE Model(
     PRIMARY KEY(BrandId, modelId),
     FOREIGN KEY (BrandId) REFERENCES Brand(BrandId)
 );
+
 CREATE TABLE Color(
     colorId INTEGER PRIMARY KEY NOT NULL,
     colorName TEXT NOT NULL
 );
+
 CREATE TABLE Vehicle(
     VehicleId INTEGER PRIMARY KEY NOT NULL,
     UserId INTEGER,
@@ -67,8 +60,15 @@ CREATE TABLE Vehicle(
     fuelType INTEGER NOT NULL CHECK(fuelType > 0 AND fuelType < 5),
     FOREIGN KEY(UserId) REFERENCES User(UserId),
     FOREIGN KEY(CategoryId) REFERENCES Category(categoryId),
-    FOREIGN KEY(BrandId, modelId) REFERENCES Model(BrandId, modelId), -- Corrected foreign key reference
+    FOREIGN KEY(BrandId, modelId) REFERENCES Model(BrandId, modelId),
     FOREIGN KEY(colorId) REFERENCES Color(colorId)
+);
+
+CREATE TABLE Images(
+    VehicleId INTEGER,
+    imageFilePath NVARCHAR(500) NOT NULL,
+    FOREIGN KEY (VehicleId) REFERENCES Vehicle(VehicleId),
+    PRIMARY KEY(VehicleId, imageFilePath)
 );
 
 CREATE TABLE Wishlist(
@@ -97,7 +97,6 @@ CREATE TABLE Trans(
     FOREIGN KEY (VehicleId) REFERENCES Vehicle(VehicleId),
     CONSTRAINT different_buyer_seller CHECK (BuyerId <> SellerId)
 );
-
 
 CREATE TABLE Chat(
     ChatId INTEGER PRIMARY KEY NOT NULL,
@@ -128,3 +127,103 @@ CREATE TABLE Review(
     FOREIGN KEY (VehicleId) REFERENCES Vehicle(VehicleId),
     CONSTRAINT unique_user_vehicle UNIQUE (UserId, VehicleId)
 );
+
+PRAGMA foreign_keys = ON;
+
+-- Inserções de exemplo usando a função datetime
+
+INSERT INTO User (UserId, userName, pass, email, is_admin) 
+VALUES 
+    (1,'john_doe', 'password123', 'john@example.com', 1),
+    (2,'jane_smith', 'pass123', 'jane@example.com', 0),
+    (3,'alex_brown', 'securepass', 'alex@example.com', 0),
+    (4,'emma_davis', 'password', 'emma@example.com', 0),
+    (5,'michael_wilson', 'p@$$w0rd', 'michael@example.com', 0);
+
+INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
+VALUES 
+    (1, 'Toyota', '/path/to/toyota_logo.png'),
+    (2, 'Honda', '/path/to/honda_logo.png'),
+    (3, 'Ford', '/path/to/ford_logo.png'),
+    (4, 'Chevrolet', '/path/to/chevrolet_logo.png'),
+    (5, 'BMW', '/path/to/bmw_logo.png');
+
+INSERT INTO Category (categoryId, categoryName, categoryFilePath) 
+VALUES 
+    (1, 'SUV', '/path/to/suv_category.png'),
+    (2, 'Sedan', '/path/to/sedan_category.png'),
+    (3, 'Truck', '/path/to/truck_category.png'),
+    (4, 'Hatchback', '/path/to/hatchback_category.png'),
+    (5, 'Coupe', '/path/to/coupe_category.png');
+
+INSERT INTO Model (modelId, BrandId, modelName) 
+VALUES 
+    (1, 1, 'Camry'),
+    (2, 2, 'Corolla'),
+    (3, 3, 'Accord'),
+    (4, 4, 'Fusion'),
+    (5, 5, 'Malibu');
+
+INSERT INTO Color (colorId, colorName) 
+VALUES 
+    (1, 'Red'),
+    (2, 'Blue'),
+    (3, 'Black'),
+    (4, 'White'),
+    (5, 'Silver');
+
+INSERT INTO Vehicle (VehicleId,UserId, CategoryId, BrandId, modelId, colorId, price, condition, kilometers, fuelType) 
+VALUES 
+    (1,1, 1, 1, 1, 1, 25000, 4, 50000, 2),
+    (2,2, 2, 2, 2, 2, 30000, 3, 60000, 3),
+    (3,3, 3, 3, 3, 3, 35000, 2, 70000, 4),
+    (4,4, 4, 4, 4, 4, 40000, 1, 80000, 1),
+    (5,5, 5, 5, 5, 5, 45000, 5, 90000, 2);
+
+INSERT INTO Wishlist (UserId, VehicleId) 
+VALUES 
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5);
+
+INSERT INTO Shopcar (UserId, VehicleId) 
+VALUES 
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5);
+
+INSERT INTO Trans (transactionId, BuyerId, SellerId, VehicleId) 
+VALUES 
+    (1, 1, 2, 1),
+    (2, 2, 3, 2),
+    (3, 3, 4, 3),
+    (4, 4, 5, 4),
+    (5, 5, 1, 5);
+
+INSERT INTO Chat (ChatId, BuyerId, SellerId) 
+VALUES 
+    (1, 1, 2),
+    (2, 2, 3),
+    (3, 3, 4),
+    (4, 4, 5),
+    (5, 5, 1);
+
+INSERT INTO Msg (MessageId, ChatId, UserId, when_sent, text_message) 
+VALUES 
+    (1, 1, 1, datetime('now'), 'Hello, I am interested in your vehicle.'),
+    (2, 2, 2, datetime('now'), 'Sure, let me know if you have any questions.'),
+    (3, 3, 3, datetime('now'), 'I can offer you a discount if you buy today.'),
+    (4, 4, 4, datetime('now'), 'I need more information about the maintenance history.'),
+    (5, 5, 5, datetime('now'), 'Is the price negotiable?');
+
+INSERT INTO Review (ReviewId, UserId, VehicleId, Rating, Comment) 
+VALUES 
+    (1, 1, 1, 4, 'Great car, very satisfied with the purchase.'),
+    (2, 2, 2, 5, 'Excellent service and quality.'),
+    (3, 3, 3, 3, 'Decent vehicle, had some issues.'),
+    (4, 4, 4, 2, 'Not happy with the purchase, had to return.'),
+    (5, 5, 5, 4, 'Good experience overall, would recommend.');
