@@ -1,6 +1,6 @@
 html {
     overflow-y: scroll;
-    height: 220vh;
+    height: 240vh;
   }
   
   body {
@@ -95,98 +95,21 @@ html {
     background-color: rgba(61, 61, 61, 0.5);
   }
   
-  .vehicles {
-    width: 18.3vw;
-    height: 21vh;
-    border-radius: 0.6vh;
-    position: absolute;
-    top: 25vh;
-  }
-  
-  .line {
-    width: 99vw;
-    height: 21vh;
-    position: absolute;
-    top: 15vh;
-    border-bottom: 0.2vh solid rgb(102, 102, 102);
-  }
-  
-  .terrain {
-    left: 6.5vw;
-  }
-  
-  .aquatic {
-    left: 40.7vw;
-  }
-  
-  .aerial {
-    right: 6.5vw;
-  }
-  
-  .decoration {
-    width: 18.3vw;
-    height: 21vh;
-    border-radius: 0.6vh;
-    position: absolute;
-    top: 21.8vh;
-    padding: 3.4vh;
-    border: 0.3vh solid rgb(102, 102, 102);
-  }
-  
-  .terra {
-    left: 4.8vw;
-  }
-  
-  .aqua {
-    left: 38.9vw;
-  }
-  
-  .air {
-    right: 4.8vw;
-  }
-  
-  .white {
-    background-color: white;
-    z-index: 2;
-  }
-  
-  .car,.boat,.plane {
-    z-index: 3;
-  }
-  
   .trans {
     background-color: transparent;
     z-index: 4;
-  }
-  
-  .trans:hover + .car {
-    animation-name: terrain-animation;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  }
-  
-  .trans:hover + .boat {
-    animation-name: aquatic-animation;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  }
-  
-  .trans:hover + .plane {
-    animation-name: aerial-animation;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
   }
   
   .wall {
     z-index: 1;
     position: absolute;
     text-align: center;
-    top: 26vh;
+    top: 20vh;
     left: 4vw;
     height: 146vh;
-    width: 91.3vw;
+    width: 20vw;
     border-radius: 0.8vh;
-    border-top: 0.5vh solid rgb(224, 224, 224);
+    border-top: 0.2vh solid rgb(224, 224, 224);
     background-color: rgb(27, 27, 27);
   }
   
@@ -202,8 +125,14 @@ html {
     border: 0.2vh solid rgb(27, 27, 27);
     transition-timing-function: ease-out;
     transition-duration: 0.2s;
-    width: 22vw;
-    height: 36vh;
+    width: 15vw;
+    margin: 3vw;
+    height: 40vh;
+  }
+
+  .options {
+    width: 70vw;
+    float: right;
   }
   
   .items:hover {
@@ -213,48 +142,29 @@ html {
     transition-duration: 0.2s;
   }
   
-  .pop {
-    font-size: 1.2vw;
-    font-weight: bold;
-    letter-spacing: 0.2vh;
-    z-index: 4;
-    position: absolute;
-    width: 10vw;
-    height: 15.4vh;
-    border-radius: 0.5vh;
-    background-color: rgb(143, 143, 143);
-    border: 0.2vh solid white;
-    text-align: center;
-    padding: 1.2vh;
-  }
-  
-  .first {
-    top: 25vh;
-  }
-  
-  .second {
-    top: 69vh;
-  }
+.brand {
+  color: white;
+  font-size: 1.6vw;
+  position: absolute;
+  top: 2vh;
+  left: 1vw;
+  border-top: 0.2vh solid white;
+  text-align: left;
+  width: 16vw;
+}
 
-  .third {
-    top: 113vh;
-  }
-  
-  .ad1,.ad4,.ad7 {
-    left: 20vw;
-  }
-  
-  .ad2,.ad5,.ad8 {
-    left: 49.7vw;
-  }
-  
-  .ad3,.ad6,.ad9 {
-    left: 79vw;
-  }
-  
+.brand_options {
+  color: white;
+  font-size: 1vw;
+  text-align: left;
+  position: absolute;
+  left: 1.5vw;
+  top: 7vh;
+}
+
   footer {
     position: absolute;
-    bottom: -120vh;
+    bottom: -140vh;
     width: 99vw;
     height: 8vh;
     text-align: center;
@@ -264,48 +174,3 @@ html {
     opacity: 40%;
     background-color: rgb(29, 29, 29);
   }
-
-  .dropbtn {
-    background-color: #794b4b;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 10vw;
-}
-  
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: #b92929;
-  }
-  
-  .dropdown {
-    position: absolute;
-    top: 17vh;
-    left: 10vw;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #e0bebe;
-    min-width: 10vw;
-    overflow: auto;
-    line-height: 3.5vh;
-    z-index: 5;
-    cursor: pointer;
-    border-radius: 0.1vw;
-    border-bottom: 0.3vh solid rgb(224, 76, 76);
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
