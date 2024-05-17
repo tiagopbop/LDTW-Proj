@@ -141,13 +141,13 @@ PRAGMA foreign_keys = ON;
 
 -- Insert example data
 
-INSERT INTO User (UserId, userName, pass, email, is_admin) 
+INSERT INTO User (UserId, userName, named, pass, email, is_admin) 
 VALUES 
-    (1,'john_doe', 'password123', 'john@example.com', 1),
-    (2,'jane_smith', 'pass123', 'jane@example.com', 0),
-    (3,'alex_brown', 'securepass', 'alex@example.com', 0),
-    (4,'emma_davis', 'password', 'emma@example.com', 0),
-    (5,'michael_wilson', 'p@$$w0rd', 'michael@example.com', 0);
+    (1,'john_doe', 'joao', 'password123', 'john@example.com', 1),
+    (2,'jane_smith', 'joana', 'pass123', 'jane@example.com', 0),
+    (3,'alex_brown', 'alexandre', 'securepass', 'alex@example.com', 0),
+    (4,'emma_davis', 'emilia', 'password', 'emma@example.com', 0),
+    (5,'michael_wilson', 'micael', 'p@$$w0rd', 'michael@example.com', 0);
 
 INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
 VALUES 
