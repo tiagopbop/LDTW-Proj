@@ -6,17 +6,6 @@ body {
     overflow: hidden;
   }
   
-  header {
-    background-color: black;
-    font-family: 'Times New Roman', serif;
-    border-bottom: 0.5vh double rgb(190, 190, 190);
-    height: 14vh;
-  }
-
-  .logo {
-    width: 10vw;
-  }
-  
   a {
     text-decoration: none;
   }

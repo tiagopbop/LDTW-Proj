@@ -8,22 +8,21 @@
         <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
     </head>
     <body>
-        <header class="website_logo">
-            <div class="top_page">
-            <a class="nav home" href="../pages/index.php">Home</a>
-            <input type="text" placeholder="Search">
-            <a class="nav messages" href="../pages/messages.php">Messages</a>
-            <a class="cart trans" href="../pages/cart.php"></a>
-            <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
-            <a class="nav login" href="../pages/login.php">Login</a>
-            </div>
-        </header>
         <section>
             <img class="logo" src="../docs/LogoInv.png" alt="Logo">
             <form class="registerForm">
                 <div class="input-wrapper">
                     <input type="text" class="information" required>
-                    <span>Email or Phone Number</span>
+                    <span>Name</span>
+                </div>
+                <br><div class="input-wrapper">
+                    <input type="text" class="information" required>
+                    <span>Username</span>
+                </div>
+                <br>
+                <div class="input-wrapper">
+                    <input type="text" class="information" required>
+                    <span>Email </span>
                 </div>
                 <br>
                 <div class="input-wrapper">
