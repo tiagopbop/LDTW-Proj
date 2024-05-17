@@ -5,17 +5,19 @@
     class User {
         public int $userId;
         public string $userName;
+        public string $named;
         public string $pass;
         public string $email;
         public bool $is_admin;
     
 
-        public function __construct(int $userId, string $userName, string $pass, string $email, bool $is_admin) {
+        public function __construct(int $userId, string $userName,string $named, string $pass, string $email, bool $is_admin) {
             $this->userId = $userId;
             $this->userName = $userName;
             $this->pass = $pass;
             $this->email = $email;
             $this->is_admin = $is_admin;
+            $this->named = $named;
         }
 
         public function giveAdmin($db) {
@@ -25,7 +27,7 @@
         }
 
         static function getUserWithPassword(PDO $db, string $email, string $userName, string $pass) : ?User {
-            $stmt = $db->prepare(' SELECT userId, userName, pass, email, is_admin, creattion_date
+            $stmt = $db->prepare(' SELECT userId, userName,named, pass, email, is_admin, creattion_date
             FROM User
             WHERE lower(email) = ? AND userName = ? AND pass = ? ');
   
@@ -35,6 +37,7 @@
                 return new User(
                     $user['userId'],
                     $user['userName'],
+                    $user['named'],
                     $user['pass'],
                     $user['email'],
                     $user['is_admin'],
@@ -44,7 +47,7 @@
         }
 
         static function getUser (PDO $db, int $id) : ?User {
-            $stmt = $db->prepare(' SELECT userId, userName, pass, email, is_admin, creattion_date
+            $stmt = $db->prepare(' SELECT userId, userName,named, pass, email, is_admin, creattion_date
             FROM User
             WHERE userId = ? ');
 
@@ -54,6 +57,7 @@
             return new User(
                 $user['userId'],
                 $user['userName'],
+                $user['named'],
                 $user['pass'],
                 $user['email'],
                 $user['is_admin'],
