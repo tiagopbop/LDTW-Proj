@@ -1,15 +1,12 @@
+html {
+  height: 100vh;
+}
+
 body {
     margin: 0px;
     padding: 0px;
     background-color: rgb(15, 15, 15);
     box-sizing: border-box;
-  }
-  
-  header {
-    background-color: black;
-    font-family: 'Times New Roman', serif;
-    border-bottom: 0.5vh double rgb(190, 190, 190);
-    height: 14vh;
   }
   
   a {
@@ -93,7 +90,7 @@ body {
     z-index: 4;
   }
   
-  .logo {
+  .logoinv {
     width: 8vw;
     border-radius: 0.25vw;
   }
@@ -140,7 +137,7 @@ body {
   button {
     font-weight: bold;
     position: absolute;
-    top: -0.4vh;
+    top: 0.2vh;
     right: -0.4vw;
     font-size: 4vh;
     border: none;
