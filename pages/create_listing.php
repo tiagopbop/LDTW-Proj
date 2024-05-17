@@ -7,17 +7,24 @@
     require_once(__DIR__ . '/../database/connection.php');
     require_once(__DIR__ . '/../database/vehicle.class.php');
     require_once(__DIR__ . '/../database/category.class.php');
+    require_once(__DIR__ . '/../database/brand.class.php');
+    require_once(__DIR__ . '/../database/model.class.php');
+    require_once(__DIR__ . '/../database/color.class.php');
+    require_once(__DIR__ . '/../database/type.class.php');
 
     require_once(__DIR__ . '/../templates/common.php');
     
     require_once(__DIR__ . '/../templates/selling.tpl.php');
 
     $db = getDatabaseConnection();
-    $stmt = $db->query("SELECT * FROM Category");
+    // $stmt = $db->query("SELECT * FROM Category");
 
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $categories = Category::getCategories($db);
+    $brands = Brand::getBrands($db);
+    $colors = Color::getColors($db);
+
     drawHeader($session);
-    drawCreateListing($categories);
+    drawCreateListing($categories, $brands, $colors);
     drawFooter();
 
 ?>

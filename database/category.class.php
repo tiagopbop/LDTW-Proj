@@ -14,18 +14,17 @@
             $this->categoryFilePath = $categoryFilePath;
         }
 
-        static function getCategories(PDO $db, int $count) : array {
-            $stmt = $db->prepare('SELECT categoryId, categoryName, categoryFilePath FROM Category
-            LIMIT ?');
-            $stmt->execute(array($count));
+        static function getCategories(PDO $db) : array {
+            $stmt = $db->prepare('SELECT categoryId, categoryName, categoryFilePath FROM Category');
+            $stmt->execute();
 
             $categories = array();
                 
-            while ($category = $stmt->fetch()) {
-                $currentCat[] = new Category(
+            while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $categories[] = new Category(
                     intval($category['categoryId']),
                     $category['categoryName'],
-                    $category['categoryFilePath'],);
+                    $category['categoryFilePath']);
             }
 
             return $categories; 
