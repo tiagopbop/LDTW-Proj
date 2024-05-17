@@ -1,6 +1,11 @@
 <?php
 
-require_once('/../database/model.class.php'); 
+require_once(__DIR__ . '/../database/connection.php');
+require_once(__DIR__ . '/../database/model.class.php'); 
+
+$db = getDatabaseConnection();
+
+
 
 
 if(isset($_GET['brandId'])) {
