@@ -4,7 +4,7 @@
     class Vehicle {
         public int $vehicleId;
         public int $userId;
-        public int $categoryId;
+        public int $typeId;
         public int $brandId;
         public int $modelId;
         public int $colorId;
@@ -14,10 +14,10 @@
         public int $fuelType;
     
 
-        public function __construct(int $vehicleId, int $userId, int $categoryId, int $brandId, int $modelId, int $colorId, int $price, int $condition, int $kilometers, int $fuelType) {
+        public function __construct(int $vehicleId, int $userId, int $typeId, int $brandId, int $modelId, int $colorId, int $price, int $condition, int $kilometers, int $fuelType) {
             $this->vehicleId = $vehicleId;
             $this->userId = $userId;
-            $this->categoryId = $categoryId;
+            $this->typeId = $typeId;
             $this->brandId = $brandId;
             $this->modelId = $modelId;
             $this->colorId = $colorId;
@@ -28,7 +28,7 @@
         }
 
         static function getVehicle(PDO $db, int $id) {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype
             FROM vehicle WHERE vehicleId = ?');
             $stmt->execute(array($id));
 
@@ -37,7 +37,7 @@
             return new Vehicle(
                 $vehicle['vehicleId'],
                 $vehicle['userId'],
-                $vehicle['categoryId'],
+                $vehicle['typeId'],
                 $vehicle['brandId'],
                 $vehicle['modelId'],
                 $vehicle['colorId'],
@@ -49,7 +49,7 @@
         }
 
         public function getRecentVehicles(PDO $db, int $count) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle LIMIT ?');
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle LIMIT ?');
             $stmt->execute(array($count));
 
             $vehicles = array();
@@ -57,7 +57,7 @@
                 $vehicles[] = new Vehicle(
                     $vehicle['vehicleId'],
                     $vehicle['userId'],
-                    $vehicle['categoryId'],
+                    $vehicle['typeId'],
                     $vehicle['brandId'],
                     $vehicle['modelId'],
                     $vehicle['colorId'],
@@ -72,7 +72,7 @@
         }
 
         static function searchBrandVehicle(PDO $db, string $search, int $count) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
                                 Brand ON (brandId)
                                 WHERE brandName LIKE ? LIMIT ?');
             $stmt->execute(array($search . '%', $count));
@@ -82,7 +82,7 @@
                 $vehicles[] = new Vehicle(
                     $vehicle['vehicleId'],
                     $vehicle['userId'],
-                    $vehicle['categoryId'],
+                    $vehicle['typeId'],
                     $vehicle['brandId'],
                     $vehicle['modelId'],
                     $vehicle['colorId'],
@@ -97,7 +97,7 @@
         }
 
         static function searchModelVehicle(PDO $db, string $search, int $count) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
                                 Model ON (modelId)
                                 WHERE modelName LIKE ? LIMIT ?');
             $stmt->execute(array($search . '%', $count));
@@ -107,7 +107,7 @@
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
-                        $vehicle['categoryId'],
+                        $vehicle['typeId'],
                         $vehicle['brandId'],
                         $vehicle['modelId'],
                         $vehicle['colorId'],
@@ -122,7 +122,7 @@
         }
 
         static function searchColorVehicle(PDO $db, int $search, int $count) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle JOIN
                                 Color ON (colorId)
                                 WHERE colorId = ? LIMIT ?');
             $stmt->execute(array($search . '%', $count));
@@ -132,7 +132,7 @@
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
-                        $vehicle['categoryId'],
+                        $vehicle['typeId'],
                         $vehicle['brandId'],
                         $vehicle['modelId'],
                         $vehicle['colorId'],
@@ -147,7 +147,7 @@
         }
 
         static function searchFuelVehicle(PDO $db, int $search, int $count) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype FROM Vehicle
                                 WHERE fuelType = ? LIMIT ?');
             $stmt->execute(array($search . '%', $count));
 
@@ -156,7 +156,7 @@
                     $vehicles[] = new Vehicle(
                         $vehicle['vehicleId'],
                         $vehicle['userId'],
-                        $vehicle['categoryId'],
+                        $vehicle['typeId'],
                         $vehicle['brandId'],
                         $vehicle['modelId'],
                         $vehicle['colorId'],
@@ -171,9 +171,9 @@
         }
 
         static function getCategoryVehicles(PDO $db, int $id) : array {
-            $stmt = $db->prepare('SELECT vehicleId, userId, categoryId, brandId, modelId, colorId, price, condition, kilometers, fueltype 
+            $stmt = $db->prepare('SELECT vehicleId, userId, typeId, brandId, modelId, colorId, price, condition, kilometers, fueltype 
                                   FROM Vehicle
-                                  WHERE categoryId = ?');
+                                  WHERE typeId = ?');
             $stmt->execute(array($id));
 
             $vehicles = [];
@@ -182,7 +182,7 @@
                 $vehicles[] = new Vehicle(
                     $vehicle['vehicleId'],
                     $vehicle['userId'],
-                    $vehicle['categoryId'],
+                    $vehicle['typeId'],
                     $vehicle['brandId'],
                     $vehicle['modelId'],
                     $vehicle['colorId'],

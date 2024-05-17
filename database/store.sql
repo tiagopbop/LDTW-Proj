@@ -34,10 +34,20 @@ CREATE TABLE Category(
     categoryFilePath TEXT NOT NULL
 );
 
+CREATE TABLE Types(
+    typeId INTEGER NOT NULL,
+    typeName TEXT NOT NULL,
+    categoryId INTEGER NOT NULL,
+    PRIMARY KEY(categoryId, typeId),
+    FOREIGN KEY (categoryId) REFERENCES Category(categoryId)
+);
+
+
 CREATE TABLE Model(
     BrandId INTEGER NOT NULL,
     modelId INTEGER NOT NULL,
     modelName NVARCHAR(100) NOT NULL,
+    typeId INTEGER NOT NULL,
     PRIMARY KEY(BrandId, modelId),
     FOREIGN KEY (BrandId) REFERENCES Brand(BrandId)
 );
@@ -50,7 +60,7 @@ CREATE TABLE Color(
 CREATE TABLE Vehicle(
     VehicleId INTEGER PRIMARY KEY NOT NULL,
     UserId INTEGER,
-    CategoryId INTEGER,
+    typeId INTEGER,
     BrandId INTEGER,
     modelId INTEGER,
     colorId INTEGER,
@@ -59,7 +69,7 @@ CREATE TABLE Vehicle(
     kilometers INTEGER,
     fuelType INTEGER NOT NULL CHECK(fuelType > 0 AND fuelType < 5),
     FOREIGN KEY(UserId) REFERENCES User(UserId),
-    FOREIGN KEY(CategoryId) REFERENCES Category(categoryId),
+    FOREIGN KEY(typeId) REFERENCES Types(typeId),
     FOREIGN KEY(BrandId, modelId) REFERENCES Model(BrandId, modelId),
     FOREIGN KEY(colorId) REFERENCES Color(colorId)
 );
