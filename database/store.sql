@@ -196,15 +196,17 @@ VALUES
     (2, 2, 2, 2, 2, 2, 30000, 3, 60000, 3),
     (3, 3, 3, 3, 3, 3, 35000, 2, 70000, 4),
     (4, 4, 4, 4, 4, 4, 40000, 1, 80000, 1),
-    (5, 5, 5, 5, 5, 5, 45000, 5, 90000, 2);
+    (5, 5, 5, 5, 5, 5, 45000, 5, 90000, 2),
+    (6, 5, 3, 3, 3, 3, 23000, 3, 90000, 2);
 
 INSERT INTO Images (VehicleId, imageFilePath) 
 VALUES 
-    (1, '/path/to/image1.png'),
-    (2, '/path/to/image2.png'),
-    (3, '/path/to/image3.png'),
-    (4, '/path/to/image4.png'),
-    (5, '/path/to/image5.png');
+    (1, '../images/Screenshot_1.png'),
+    (2, '../images/carro-fixa.png'),
+    (3, '../images/day-exterior-04_2tb.png'),
+    (4, '../images/modelosv3_xceed-phev.png'),
+    (5, '../images/pad_screenshot.png'),
+    (6, '../images/washer2.png');
 
 INSERT INTO Wishlist (UserId, VehicleId) 
 VALUES 

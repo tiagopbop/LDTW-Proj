@@ -13,23 +13,35 @@
             $this->logoFilePath = $logoFilePath;
         }
 
+
         static function getBrands(PDO $db) : array {
             $stmt = $db->prepare('SELECT BrandId, BrandName, logoFilePath FROM Brand');
-            $stmt->execute();
-
+            $stmt->execute(array());
+            
             $brands = array();
-                
-            while ($brand = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ($brand = $stmt->fetch()) {
                 $brands[] = new Brand(
-                    intval($brand['BrandId']),
+                    $brand['BrandId'],
                     $brand['BrandName'],
-                    $brand['logoFilePath']);
+                    $brand['logoFilePath']
+                );
             }
-
-            return $brands; 
+            
+            return $brands;
         }
-    }
 
+        public static function getBrandNameById(PDO $db, int $brandId) : ?string {
+            $stmt = $db->prepare('SELECT BrandName FROM Brand WHERE BrandId = ?');
+            $stmt->execute([$brandId]);
+            
+            $brandName = $stmt->fetchColumn();
+            if ($brandName === false) {
+                // Return null if no brand name is found
+                return null;
+            }
+            return $brandName;
+        }
+}
 ?>
 
 

@@ -7,17 +7,12 @@
     require_once(__DIR__ . '/../database/connection.php');
     require_once(__DIR__ . '/../database/vehicle.class.php');
     require_once(__DIR__ . '/../database/category.class.php');
-    require_once(__DIR__ . '/../database/brand.class.php');
-    require_once(__DIR__ . '/../database/model.class.php');
-    require_once(__DIR__ . '/../database/color.class.php');
-    require_once(__DIR__ . '/../database/type.class.php');
 
     require_once(__DIR__ . '/../templates/common.php');
     
     require_once(__DIR__ . '/../templates/selling.tpl.php');
 
     $db = getDatabaseConnection();
-    // $stmt = $db->query("SELECT * FROM Category");
 
     $categories = Category::getCategories($db);
     $brands = Brand::getBrands($db);

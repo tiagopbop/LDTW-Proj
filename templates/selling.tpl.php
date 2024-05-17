@@ -14,7 +14,7 @@ function drawCreateListing(array $listing, array $brands, array $colors)
 ?>
 
 
-<form action="../actions/action_edit_listing.php" method="post">
+<form action="../actions/action_create_listing.php" method="post">
     <label for="category">Select Category:</label>
     <select name="category" id="category">
         <?php foreach ($listing as $category): ?>
@@ -52,11 +52,18 @@ function drawCreateListing(array $listing, array $brands, array $colors)
         <?php endforeach; ?>
     </select>
 
-    <label for="price">Price:</label>
-    <input type="number" name="price" id="price" step="0.01" required>
 
     <label for="kilometers">Kilometers:</label>
     <input type="number" name="kilometers" id="kilometers" step="1" required>
+
+    <label for="condition">Condition:</label>
+    <input type="number" name="condition" id="condition" min="1" max="5" required>
+
+    <label for="fuelType">Fuel Type:</label>
+    <input type="number" name="fuelType" id="fuelType" min="1" max="4" required>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" step="0.01" required>
 
     <button type="submit">Submit</button>
 
