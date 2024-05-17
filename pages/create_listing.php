@@ -14,8 +14,8 @@
 
     $db = getDatabaseConnection();
     $stmt = $db->query("SELECT * FROM Category");
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     drawHeader($session);
     drawCreateListing($categories);
     drawFooter();

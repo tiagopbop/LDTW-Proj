@@ -160,11 +160,24 @@ VALUES
 
 INSERT INTO Category (categoryId, categoryName, categoryFilePath) 
 VALUES 
-    (1, 'SUV', '/path/to/suv_category.png'),
-    (2, 'Sedan', '/path/to/sedan_category.png'),
-    (3, 'Truck', '/path/to/truck_category.png'),
-    (4, 'Hatchback', '/path/to/hatchback_category.png'),
-    (5, 'Coupe', '/path/to/coupe_category.png');
+    (1, 'Land', '/path/to/suv_category.png'),
+    (2, 'Water', '/path/to/sedan_category.png'),
+    (3, 'Air', '/path/to/truck_category.png'),
+
+
+INSERT INTO Types (typeId, typeName, categoryId) 
+VALUES 
+    (1,'Car', 1),
+    (2,'Bike', 1),
+    (3,'Truck', 1),
+    (4,'Boat', 2),
+    (5,'Submarine', 2),
+    (6,'Waterbike', 2),
+    (7,'Plane', 3),
+    (8,'Helicopter', 3),
+    (9,'Rocket', 3),
+
+
 
 INSERT INTO Model (modelId, BrandId, modelName) 
 VALUES 
