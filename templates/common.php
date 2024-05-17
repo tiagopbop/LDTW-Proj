@@ -16,33 +16,50 @@ function getImageById($db, $VehicleId) {
     $stmt->execute([$VehicleId]);
     return $stmt->fetchColumn();
 }
-
-function drawHeader($session) {
 ?>
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/index.css" rel="stylesheet">
-    <title>BlazeDrive</title>
-    <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
-</head>
-<body>
-    <header class="website_logo">
-        <div class="top_page">
-            <img class="logo" src="../docs/Logo.jpg" alt="Logo">
-            <a class="nav home" href="../pages/index.php">Home</a>
-            <input type="text" placeholder="Search">
-            <a class="nav messages" href="../pages/messages.php">Messages</a>
-            <a class="cart trans" href="../pages/cart.php"></a>
-            <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
-            <?php if (!$session->isLoggedIn()) logInFalse(); ?>
-        </div>
-    </header>
-<?php
-}
 
+<?php function drawHeader($session) { ?>
+    <!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/index.css" rel="stylesheet">
+        <title>BlazeDrive</title>
+        <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
+    </head>
+    <body>
+        <header class="website_logo">
+            <div class="top_page">
+            <img class="logo" src="../docs/Logo.jpg" alt="Logo">
+                <a class="nav home" href="../pages/index.php">Home</a>
+                <form id="f1">
+                <input id="myInput" type="text" placeholder="Search">
+                <button id="myBtn">&#10162;</button>
+                </form>
+                <div class="searchResults"></div>
+                <a class="nav messages" href="../pages/messages.php">Messages</a>
+                <a class="cart trans" href="../pages/cart.php"></a>
+                <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
+                <?php
+                    if (!$session->isLoggedIn()) logInFalse();
+                    else logInTrue();
+                ?>
+                <script>
+                var input = document.getElementById("myInput");
+                input.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("myBtn").click();
+                    console.log(inputText)
+                }
+                });
+                </script>
+            </div>
+        </header>
+<?php } ?>
+
+<?php
 function drawResto($db, $vehicles) {
 ?>
     <section>
@@ -99,48 +116,46 @@ function drawResto($db, $vehicles) {
         <?php endforeach; ?>
     </section>
 <?php
-}
+} ?>
 
-function drawFooter() {
-?>
-</main>
+<?php function drawFooter() { ?>
+    </main>
 
-<footer>
+    <footer>
     <p class="foot">© 2024 BlazeDrive All rights reserved.</p>
-</footer>
-</body>
+    </footer>
+  </body>
 </html>
-<?php
-}
+<?php } ?>
 
-function logInFalse() {
-?>
-<a class="nav login" href="../pages/login.php">Login</a>
-<a class="nav register" href="../pages/register.php">Register</a>
-<?php
-}
+<?php function logInFalse() { ?>
+    <a class="nav login" href="../pages/login.php">Login</a>
+    <a class="nav register" href="../pages/register.php">Register</a>
+<?php } ?>
 
-function drawLogIn() {
-?>
-<section>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/register.css" rel="stylesheet">
-    <img class="logo" src="../docs/LogoInv.png" alt="Logo">
-    <form>
-        <div class="input-wrapper">
-            <input type="text" required>
-            <span>Email or Phone Number</span>
-        </div>
-        <br>
-        <div class="input-wrapper">
-            <input type="text" required>
-            <span>Password</span>
-            <button type="submit">&#10162;</button>
-        </div>
-    </form>
-</section>
+<?php function logInTrue() { ?>
+    <a class="nav login" href="../pages/additem.php">Add item</a>
+    <a class="nav register" href="../pages/profile.php">Profile</a>
+<?php } ?>
+
+<?php function drawLogIn() { ?>
+    <section>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/login.css" rel="stylesheet">
+            <img class="logoinv" src="../docs/LogoInv.png" alt="Logo">
+            <form>
+                <div class="input-wrapper">
+                    <input type="text" required>
+                    <span>Email or Username</span>
+                </div>
+                <br>
+                <div class="input-wrapper">
+                    <input type="text" required>
+                    <span>Password</span>
+                    <button type="submit">&#10162;</button>
+                </div>
+            </form>
+        </section>
 </html>
-<?php
-}
-?>
+<?php } ?>
