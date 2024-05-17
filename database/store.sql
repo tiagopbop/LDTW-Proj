@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Images;
 
 CREATE TABLE User(
-    UserId INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
-    userName NVARCHAR(100) NOT NULL,
+    UserId INTEGER PRIMARY KEY NOT NULL,
+    userName NVARCHAR(100) NOT NULL UNIQUE,
     named NVARCHAR(100) NOT NULL,
     pass NVARCHAR(100) NOT NULL,
     email NVARCHAR(100) NOT NULL,
@@ -141,13 +141,13 @@ PRAGMA foreign_keys = ON;
 
 -- Inserções de exemplo usando a função datetime
 
-INSERT INTO User (UserId, userName, pass, email, is_admin) 
+INSERT INTO User (UserId, userName, named, pass, email, is_admin) 
 VALUES 
-    (1,'john_doe', 'password123', 'john@example.com', 1),
-    (2,'jane_smith', 'pass123', 'jane@example.com', 0),
-    (3,'alex_brown', 'securepass', 'alex@example.com', 0),
-    (4,'emma_davis', 'password', 'emma@example.com', 0),
-    (5,'michael_wilson', 'p@$$w0rd', 'michael@example.com', 0);
+    (1,'john_doe', 'hihi', 'password123', 'john@example.com', 1),
+    (2,'jane_smith','rawr', 'pass123', 'jane@example.com', 0),
+    (3,'alex_brown','pepapig', 'securepass', 'alex@example.com', 0),
+    (4,'emma_davis','oiledman', 'password', 'emma@example.com', 0),
+    (5,'michael_wilson', 'yessir','p@$$w0rd', 'michael@example.com', 0);
 
 INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
 VALUES 
