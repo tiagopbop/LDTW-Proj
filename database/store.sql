@@ -3,6 +3,7 @@ PRAGMA foreign_keys = ON;
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Brand;
 DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Types;
 DROP TABLE IF EXISTS Model;
 DROP TABLE IF EXISTS Color;
 DROP TABLE IF EXISTS Vehicle;
@@ -35,19 +36,16 @@ CREATE TABLE Category(
 );
 
 CREATE TABLE Types(
-    typeId INTEGER NOT NULL,
+    typeId INTEGER PRIMARY KEY NOT NULL,
     typeName TEXT NOT NULL,
     categoryId INTEGER NOT NULL,
-    PRIMARY KEY(categoryId, typeId),
     FOREIGN KEY (categoryId) REFERENCES Category(categoryId)
 );
-
 
 CREATE TABLE Model(
     BrandId INTEGER NOT NULL,
     modelId INTEGER NOT NULL,
     modelName NVARCHAR(100) NOT NULL,
-    typeId INTEGER NOT NULL,
     PRIMARY KEY(BrandId, modelId),
     FOREIGN KEY (BrandId) REFERENCES Brand(BrandId)
 );
@@ -69,7 +67,7 @@ CREATE TABLE Vehicle(
     kilometers INTEGER,
     fuelType INTEGER NOT NULL CHECK(fuelType > 0 AND fuelType < 5),
     FOREIGN KEY(UserId) REFERENCES User(UserId),
-    FOREIGN KEY(typeId) REFERENCES Types(typeId),
+    FOREIGN KEY(typeId) REFERENCES Types(typeId), 
     FOREIGN KEY(BrandId, modelId) REFERENCES Model(BrandId, modelId),
     FOREIGN KEY(colorId) REFERENCES Color(colorId)
 );
@@ -162,7 +160,7 @@ INSERT INTO Category (categoryId, categoryName, categoryFilePath)
 VALUES 
     (1, 'Land', '/path/to/suv_category.png'),
     (2, 'Water', '/path/to/sedan_category.png'),
-    (3, 'Air', '/path/to/truck_category.png'),
+    (3, 'Air', '/path/to/truck_category.png');
 
 
 INSERT INTO Types (typeId, typeName, categoryId) 
@@ -175,7 +173,7 @@ VALUES
     (6,'Waterbike', 2),
     (7,'Plane', 3),
     (8,'Helicopter', 3),
-    (9,'Rocket', 3),
+    (9,'Rocket', 3);
 
 
 
@@ -195,7 +193,7 @@ VALUES
     (4, 'White'),
     (5, 'Silver');
 
-INSERT INTO Vehicle (VehicleId,UserId, CategoryId, BrandId, modelId, colorId, price, condition, kilometers, fuelType) 
+INSERT INTO Vehicle (VehicleId,UserId, typeId, BrandId, modelId, colorId, price, condition, kilometers, fuelType) 
 VALUES 
     (1,1, 1, 1, 1, 1, 25000, 4, 50000, 2),
     (2,2, 2, 2, 2, 2, 30000, 3, 60000, 3),

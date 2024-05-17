@@ -22,7 +22,7 @@
             $categories = array();
                 
             while ($category = $stmt->fetch()) {
-                $currentCat[] = new Category(
+                $categories[] = new Category(
                     intval($category['categoryId']),
                     $category['categoryName'],
                     $category['categoryFilePath'],);
