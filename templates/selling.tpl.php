@@ -12,8 +12,18 @@ require_once(__DIR__ . '/../database/color.class.php');
 function drawCreateListing(array $listing, array $brands, array $colors)
 {
 ?>
-
-
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/selling.css" rel="stylesheet">
+        <title>BlazeDrive</title>
+        <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+<section class="wall">
+            <div class="transp">+</div>
+            <img class="input_image" src="../docs/placeholder.jpg" alt="input_image">
+<div class="block">
 <form action="../actions/action_create_listing.php" method="post">
     <label for="category">Select Category:</label>
     <select name="category" id="category">
@@ -23,11 +33,13 @@ function drawCreateListing(array $listing, array $brands, array $colors)
             </option>
         <?php endforeach; ?>
     </select>
+    <br>
 
     <label for="types">Select Type:</label>
     <select name="types" id="types">
         <!-- Types will be populated dynamically based on the selected brand -->
     </select>
+    <br>
 
     <label for="brand">Select Brand:</label>
     <select name="brand" id="brand">
@@ -37,11 +49,13 @@ function drawCreateListing(array $listing, array $brands, array $colors)
             </option>
         <?php endforeach; ?>
     </select>
+    <br>
 
     <label for="model">Select Model:</label>
     <select name="model" id="model">
         <!-- Models will be populated dynamically based on the selected brand -->
     </select>
+    <br>
 
     <label for="color">Select Color:</label>
     <select name="color" id="color">
@@ -51,24 +65,31 @@ function drawCreateListing(array $listing, array $brands, array $colors)
             </option>
         <?php endforeach; ?>
     </select>
+    <br>
 
 
     <label for="kilometers">Kilometers:</label>
     <input type="number" name="kilometers" id="kilometers" step="1" required>
 
+    <br>
     <label for="condition">Condition:</label>
     <input type="number" name="condition" id="condition" min="1" max="5" required>
 
+    <br>
     <label for="fuelType">Fuel Type:</label>
     <input type="number" name="fuelType" id="fuelType" min="1" max="4" required>
 
+    <br>
     <label for="price">Price:</label>
     <input type="number" name="price" id="price" step="0.01" required>
 
+    <br>
     <button type="submit">Submit</button>
 
 
 </form>
+</div>
+</section>
 
 <script>
     document.getElementById('brand').addEventListener('change', function() {

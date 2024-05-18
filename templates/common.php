@@ -30,14 +30,12 @@ function getImageById($db, $VehicleId) {
     </head>
     <body>
         <header class="website_logo">
-            <div class="top_page">
             <img class="logo" src="../docs/Logo.jpg" alt="Logo">
                 <a class="nav home" href="../pages/index.php">Home</a>
                 <form id="f1">
                 <input id="myInput" type="text" placeholder="Search">
                 <button id="myBtn">&#10162;</button>
                 </form>
-                <div class="searchResults"></div>
                 <a class="nav messages" href="../pages/messages.php">Messages</a>
                 <a class="cart trans" href="../pages/cart.php"></a>
                 <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
@@ -55,13 +53,13 @@ function getImageById($db, $VehicleId) {
                 }
                 });
                 </script>
-            </div>
         </header>
 <?php } ?>
 
 <?php
 function drawResto($db, $vehicles) {
 ?>
+    <div class="line"></div>
     <section>
         <div class="decoration terra"></div>
         <div class="vehicles terrain white"></div>
@@ -122,7 +120,7 @@ function drawResto($db, $vehicles) {
     </main>
 
     <footer>
-    <p class="foot">© 2024 BlazeDrive All rights reserved.</p>
+    <p class="footer">© 2024 BlazeDrive All rights reserved.</p>
     </footer>
   </body>
 </html>
