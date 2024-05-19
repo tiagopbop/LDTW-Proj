@@ -8,9 +8,9 @@
 
 ## Install Instructions
 
-    git clone https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw15g07
+    git clone git@github.com:FEUP-LTW-2024/ltw-project-2024-ltw13g03.git
     git checkout final-delivery-v1
-    sqlite3 database/database.db < database/database.sql
+    sqlite3 store.db < store.sql
     php -S localhost:9000
 
 ## External Libraries
@@ -24,7 +24,12 @@ We have used the following external libraries:
 
 ## Screenshots
 
-(2 or 3 screenshots of your website)
+![image](https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw13g03/assets/132365868/843b9dbb-dc3f-4b7b-bc47-e80d4d6751ab)
+
+![image](https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw13g03/assets/132365868/99683376-6491-4585-96ed-27fde2da39bf)
+
+![image](https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw13g03/assets/132365868/ff5af59e-2e73-4feb-9413-ce100278265f)
+
 
 ## Implemented Features
 
