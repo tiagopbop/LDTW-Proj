@@ -13,15 +13,6 @@
     sqlite3 store.db < store.sql
     php -S localhost:9000
 
-## External Libraries
-
-(you can remove this section if it doesn't apply to you)
-
-We have used the following external libraries:
-
-- Library 1
-- Library 2
-
 ## Screenshots
 
 ![image](https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw13g03/assets/132365868/843b9dbb-dc3f-4b7b-bc47-e80d4d6751ab)
