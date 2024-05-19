@@ -1,6 +1,22 @@
   html {
     height: 100vh;
   }
+  .message {
+    color: aliceblue;
+  }
+  .write {
+    display: none;
+}
+
+.message.left {
+    /* Styles for messages aligned to the left */
+    text-align: left;
+}
+
+.message.right {
+    /* Styles for messages aligned to the right */
+    text-align: right;
+}
 
   .wall {
     z-index: 1;

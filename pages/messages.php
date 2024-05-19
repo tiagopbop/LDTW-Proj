@@ -17,4 +17,5 @@ $db = getDatabaseConnection();
 drawHeader($session);
 drawMessages($db, 6); // Assuming you want to pass a user ID here
 drawFooter();
+
 ?>

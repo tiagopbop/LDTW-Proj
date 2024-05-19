@@ -14,6 +14,6 @@
     $db = getDatabaseConnection();
 
     drawHeader($session);
-    drawItem($db, intval($_GET['id']));
+    drawItem($db, intval($_GET['id']),6);
     drawFooter();
 ?>

@@ -29,22 +29,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['currentUser']) && isse
         if ($chat) {
             $ChatId = $chat['ChatId'];
             
-            // Fetch all messages for the retrieved chat ID
+ // Fetch all messages for the retrieved chat ID
             try {
                 // Prepare the SQL query to retrieve messages
-                $stmt = $db->prepare("SELECT * FROM Msg WHERE ChatId = :ChatId");
+                $stmt = $db->prepare("SELECT Msg.*, User.named, User.UserId AS SenderId FROM Msg INNER JOIN User ON Msg.UserId = User.UserId WHERE ChatId = :ChatId");
                 $stmt->bindParam(':ChatId', $ChatId, PDO::PARAM_INT);
                 $stmt->execute();
                 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 // Output the messages in HTML format
                 foreach ($messages as $message) {
-                    echo '<div class="message">' . htmlspecialchars($message['text_message']) . '</div>';
+                    $alignClass = ($message['SenderId'] == $currentUser) ? 'left' : 'right';
+                    if(($message['SenderId'] == $currentUser))
+                    {
+                        echo '<div class="message ' . $alignClass . '">' . htmlspecialchars($message['named']) . ' - ' . htmlspecialchars($message['text_message']) . '</div>';
+
+                    }
+                   else{
+                    echo '<div class="message ' . $alignClass . '">' . htmlspecialchars($message['text_message']) . ' - ' . htmlspecialchars($message['named']) . '</div>';
+
+                   }
                 }
             } catch (PDOException $e) {
                 // Handle database errors
                 echo "Error: " . $e->getMessage();
             }
+
         } else {
             echo "Error: Chat not found.";
         }
