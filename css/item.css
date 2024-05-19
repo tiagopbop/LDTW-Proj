@@ -9,6 +9,7 @@
     left: 16vw;
     height: 50vh;
     border-radius: 0.4vw;
+    max-height: 45vh;
   }
 
   .wally {

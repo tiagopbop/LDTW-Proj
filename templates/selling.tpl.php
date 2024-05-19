@@ -12,19 +12,14 @@ require_once(__DIR__ . '/../database/color.class.php');
 function drawCreateListing(array $listing, array $brands, array $colors)
 {
 ?>
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/selling.css" rel="stylesheet">
-    <title>BlazeDrive</title>
-    <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+
 <div class="wall">
     <input class="image" type="file" name="images[]" id="images" multiple required>
     <div class="transp">+</div>
-    <img class="input_image" src="../docs/placeholder.jpg">
+    <img class="input_image" src="../docs/placeholder.jpg" id="imagePreview" alt="Image Preview">
 <br>
     <div class="block">
 <form action="../actions/action_create_listing.php" method="post" enctype="multipart/form-data">
@@ -123,6 +118,19 @@ function drawCreateListing(array $listing, array $brands, array $colors)
         };
         xhr.open('GET', '../actions/get_types.php?categoryId=' + categoryId, true);
         xhr.send();
+    });
+</script>
+
+<script>
+        document.getElementById('images').addEventListener('change', function(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
     });
 </script>
 

@@ -55,7 +55,7 @@ function getFuelType(int $id) : string {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../css/item.css" rel="stylesheet">
         <img class="item" src=<?= '../productImages/' . $id . '-1.jpg' ?> alt="Ad4">
-        <section class="wall">
+        <section class="wally">
             
             <?php
                 // Fetch brand and model information from the database based on the item ID
