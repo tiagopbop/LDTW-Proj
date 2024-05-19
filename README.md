@@ -43,7 +43,7 @@
 
 - [x] Browse items using filters like category, price, and condition.
 - [x] Engage with sellers to ask questions or negotiate prices.
-- [x] Add items to a wishlist or shopping cart.
+- [ ] Add items to a wishlist or shopping cart.
 - [ ] Proceed to checkout with their shopping cart (simulate payment process).
 
 **Admins**  should be able to:
