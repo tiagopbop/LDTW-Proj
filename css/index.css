@@ -10,7 +10,6 @@ body {
 }
 
 .logo {
-  
   width: 6vw;
 }
 
@@ -41,21 +40,6 @@ a {
 .home {
   width: 12vw;
   left: 13.75vw;
-}
-
-.website_logo input[type=text] {
-  position: absolute;
-  width: 35vw;
-  height: 3vh;
-  left: 30.5vw;
-  top: 2.35vh;
-  padding: 0.63vh;
-  margin-top: 0.72vh;
-  margin-right: 1vh;
-  border: none;
-  font-size: 1vw;
-  background-color: rgb(238, 238, 238);
-  border-radius: 10vh;
 }
 
 .register {
@@ -207,7 +191,7 @@ a {
 
 .items {
   z-index: 3;
-  border-radius: 0.4vh;
+  border-radius: 1vh;
   border: 0.2vh solid rgb(27, 27, 27);
   transition-timing-function: ease-out;
   transition-duration: 0.2s;

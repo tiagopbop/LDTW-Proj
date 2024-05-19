@@ -1,3 +1,13 @@
+<?php
+declare(strict_types=1);
+
+require_once(__DIR__ . '/../database/vehicle.class.php');
+require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/category.class.php');
+require_once(__DIR__ . '/../database/brand.class.php');
+require_once(__DIR__ . '/../database/color.class.php');
+?>
+
 <?php function drawBrowse() { ?>
     <head>
         <meta charset="UTF-8">
@@ -26,7 +36,51 @@
         </div>
         <section class="wall">
           <span class="brand">Brand</span>
+          <forms>
+          <select class="brand_options" name="brand" id="brand">
+        <?php foreach ($brands as $brand): ?>
+            <option  value="<?= $brand->BrandId ?>">
+                <?= htmlentities($brand->BrandName) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+        </forms>
         </section>
     </body>
+    <script>
+    document.getElementById('brand').addEventListener('change', function() {
+        var brandId = this.value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.getElementById('model').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Request failed: ' + xhr.status);
+                }
+            }
+        };
+        xhr.open('GET', '../utils/get_models.php?brandId=' + brandId, true);
+        xhr.send();
+    });
+</script>
+
+<script>
+    document.getElementById('category').addEventListener('change', function() {
+        var categoryId = this.value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.getElementById('types').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Request failed: ' + xhr.status);
+                }
+            }
+        };
+        xhr.open('GET', '../actions/get_types.php?categoryId=' + categoryId, true);
+        xhr.send();
+    });
+</script>
 </html>
 <?php } ?>

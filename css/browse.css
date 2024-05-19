@@ -28,7 +28,7 @@ html {
     border: 0.2vh solid rgb(27, 27, 27);
     transition-timing-function: ease-out;
     transition-duration: 0.2s;
-    width: 15vw;
+    width: 16vw;
     margin: 3vw;
     height: 40vh;
   }
@@ -57,12 +57,12 @@ html {
 }
 
 .brand_options {
-  color: white;
-  font-size: 1vw;
   text-align: left;
   position: absolute;
-  left: 1.5vw;
+  left: 1vw;
   top: 7vh;
+  width: 8vw;
+  font-size: 1.6vw;
 }
 
   footer {

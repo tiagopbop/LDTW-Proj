@@ -114,13 +114,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" id="userName" name="userName" class="information" required onkeyup="checkUsernameAvailability()">
                 <span>Username</span>
             </div>
-            <span id="userNameMessage" style="color: red;"></span><br>
+            <span id="userNameMessage" style="color: red; font-weight: bold;"></span><br>
             <br>
             <div class="input-wrapper">
                 <input type="email" id="email" name="email" class="information" required onkeyup="checkEmailAvailability()">
                 <span>Email</span>
             </div>
-            <span id="emailMessage" style="color: red;"></span><br>
+            <span id="emailMessage" style="color: red; font-weight: bold;"></span><br>
             <br>
             <div class="input-wrapper">
                 <input type="password" id="pass" name="pass" class="information" required onkeyup="checkPasswordMatch()">
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <br>
             <span id="passwordMatchMessage" style="color: red;"></span><br>
-            <div id="message" style="color: green;"></div>
+            <div id="message" style="color: green; font-weight: bold;"></div>
         </form>
     </section>
     <script>

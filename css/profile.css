@@ -35,7 +35,7 @@
 }
 
 .change {
-    font-size: 1.1vw;
+    font-size: 1.2vw;
     color: white;
     position: absolute;
     background-color: rgba(15, 15, 15, 0.349);
@@ -43,6 +43,8 @@
     border-radius: 0.8vw;
     opacity: 70%;
     cursor: pointer;
+    bottom: 4vh;
+    left: 14vw;
 }
 
 .username {
@@ -55,26 +57,6 @@
 
 .password {
   top: 21vh;
-}
-
-.nm {
-  top: 5vh;
-    left: 24vw;
-}
-
-.usr {
-  top: 10.8vh;
-  left: 28vw;
-}
-
-.eml {
-  top: 15.8vh;
-  left: 36.5vw;
-}
-
-.psswrd {
-  top: 20.8vh;
-  left: 22.5vw;
 }
 
 .change:hover {

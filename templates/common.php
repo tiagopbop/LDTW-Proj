@@ -32,10 +32,6 @@ function getImageById($db, $VehicleId) {
         <header class="website_logo">
             <img class="logo" src="../docs/Logo.jpg" alt="Logo">
                 <a class="nav home" href="../pages/index.php">Home</a>
-                <form id="f1">
-                <input id="myInput" type="text" placeholder="Search">
-                <button id="myBtn">&#10162;</button>
-                </form>
                 <a class="nav messages" href="../pages/messages.php">Messages</a>
                 <a class="cart trans" href="../pages/cart.php"></a>
                 <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">

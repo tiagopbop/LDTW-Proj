@@ -12,7 +12,7 @@
     require_once(__DIR__ . '/../templates/browse.tpl.php');
 
     drawHeader($session);
-    drawBrowse();
+    drawBrowse($db, $id);
     drawFooter();
 ?>
 

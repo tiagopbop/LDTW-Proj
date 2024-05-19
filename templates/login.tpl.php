@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <section>
         <img class="logoinv" src="../docs/LogoInv.png" alt="Logo">
-        <div id="message" class="error-message"></div>
+        <div id="message" style="font-weight: bold;" class="error-message"></div>
         <form id="loginForm" class="loginForm" method="POST">
             <div class="input-wrapper">
                 <input type="text" id="userNameOrEmail" name="userNameOrEmail" class="information" required>
@@ -79,9 +79,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         const data = JSON.parse(response);
                         $('#message').text(data.message);
                         if (data.success) {
+                            $('#message').css('color', 'green');
                             $('#loginForm')[0].reset();
                             // Redirect to another page on successful login
-                            window.location.href = 'index.php';
+                            setTimeout(() => {  window.location.href = 'index.php'; }, 500);
+                        } else {
+                            $('#message').css('color', 'red');
                         }
                     }
                 });
