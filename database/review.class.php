@@ -3,37 +3,37 @@
 
 
     class Review {
-        public int $idReview;
-        public int $userId;
-        public int $vehicleId;
-        public int $rating;
-        public string $comment;
+        public int $ReviewId;
+        public int $UserId;
+        public int $VehicleId;
+        public int $Rating;
+        public string $Comment;
     
 
-        public function __construct(int $idReview, int $userId, int $vehicleId, int $rating, string $comment) {
-            $this->idReview = $idReview;
-            $this->userId = $userId;
-            $this->vehicleId = $vehicleId;
-            $this->rating = $rating;
-            $this->comment = $comment;
+        public function __construct(int $ReviewId, int $UserId, int $VehicleId, int $Rating, string $Comment) {
+            $this->ReviewId = $ReviewId;
+            $this->UserId = $UserId;
+            $this->VehicleId = $VehicleId;
+            $this->Rating = $Rating;
+            $this->Comment = $Comment;
 
         }
 
         static function getVehicleReviews(PDO $db, int $id) : array {
-            $stmt = $db->prepare('SELECT idReview, userId, rating, comment 
+            $stmt = $db->prepare('SELECT ReviewId, UserId, VehicleId, Rating, Comment 
                                 FROM Review 
-                                WHERE vehicleId = ?');
+                                WHERE VehicleId = ?');
             $stmt->execute(array($id));
 
             $reviews = [];
 
             while ($review = $stmt->fetch()) {
                 $reviews[] = new Review(
-                    $review['idReview'],
-                    $review['userId'],
-                    $review['rating'],
-                    $review['comment'],
-                    $review['vehicleId']
+                    $review['ReviewId'],
+                    $review['UserId'],
+                    $review['VehicleId'],
+                    $review['Rating'],
+                    $review['Comment']
                 );
             }
             return $reviews;

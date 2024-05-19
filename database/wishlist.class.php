@@ -4,27 +4,25 @@
 
     class Wishlist {
         public int $UserId;
-        public string $VehicleId;
+        public int $VehicleId;
 
 
-        public function __construct(int $UserId, string $VehicleId) {
+        public function __construct(int $UserId, int $VehicleId) {
             $this->UserId = $UserId;
             $this->VehicleId = $VehicleId;
         }
 
-        static function getUserWishlist(PDO $db, int $userId, int $count): array {
-            $stmt = $db->prepare('SELECT userId, vehicleId FROM Wishlist 
-                                  WHERE userId = ? 
-                                  LIMIT ?');
+        static function getUserWishlist(PDO $db, int $userId): array {
+            $stmt = $db->prepare('SELECT UserId, vehicleId FROM Wishlist 
+                                  WHERE UserId = ?');
             $stmt->bindValue(1, $userId, PDO::PARAM_INT); 
-            $stmt->bindValue(2, $count, PDO::PARAM_INT);
             $stmt->execute();
         
             $wishlistV = [];
             while ($wishlist = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $wishlistV[] = new Wishlist(
-                    $wishlist['userId'],
-                    $wishlist['vehicleId']
+                    $wishlist['UserId'],
+                    $wishlist['VehicleId']
                 );
             }
             return $wishlistV;

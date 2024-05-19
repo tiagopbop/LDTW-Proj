@@ -49,6 +49,18 @@
             return $types;
         }
 
+        public static function getTypeName(PDO $db, int $id) : ?string {
+            $stmt = $db->prepare('SELECT typeName FROM Types WHERE typeId = ?');
+            $stmt->execute([$id]);
+            
+            $typeName = $stmt->fetchColumn();
+            if ($typeName === false) {
+                // Return null if no brand name is found
+                return null;
+            }
+            return $typeName;
+        }
+
     }
 
 ?>
