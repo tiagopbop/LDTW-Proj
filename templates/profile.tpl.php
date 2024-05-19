@@ -81,7 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="data username">GatinhoNeon123</span>
             <span class="data email">email_exemplo@arroba.com</span>
             <span class="data password">Wuant123</span>
-            <a href="../pages/changeProfile.php"<span class="change">Change credentials</span></a>
+            <a href="../pages/changeProfile.php"><span class="change">Change user info </span></a>
+            
+
         <form method="POST" action="../pages/logout.php" style="display:inline;">
             <button class="logout" type="submit" class="logout">Logout</button>
         </form>

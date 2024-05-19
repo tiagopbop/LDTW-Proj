@@ -1,12 +1,11 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/connection.php');
 require_once(__DIR__ . '/../database/user.class.php');
-
 require_once(__DIR__ . '/../templates/common.php');
 
 // Check if user is logged in
@@ -18,12 +17,12 @@ if (!$session->isLoggedIn()) {
 $userId = $session->getId();
 $db = getDatabaseConnection();
 
+// Handle AJAX requests for checking username availability
 if (isset($_GET["checkUsername"])) {
     $usernameToCheck = $_GET["checkUsername"] ?? '';
 
-    $stmt = $db->prepare("SELECT COUNT(*) AS count FROM User WHERE userName = :userName AND id != :userId");
+    $stmt = $db->prepare("SELECT COUNT(*) AS count FROM User WHERE userName = :userName");
     $stmt->bindValue(':userName', $usernameToCheck, PDO::PARAM_STR);
-    $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,12 +32,12 @@ if (isset($_GET["checkUsername"])) {
     exit;
 }
 
+// Handle AJAX requests for checking email availability
 if (isset($_GET["checkEmail"])) {
     $emailToCheck = $_GET["checkEmail"] ?? '';
 
-    $stmt = $db->prepare("SELECT COUNT(*) AS count FROM User WHERE email = :email AND id != :userId");
+    $stmt = $db->prepare("SELECT COUNT(*) AS count FROM User WHERE email = :email");
     $stmt->bindValue(':email', $emailToCheck, PDO::PARAM_STR);
-    $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -47,7 +46,7 @@ if (isset($_GET["checkEmail"])) {
     echo json_encode(['emailExists' => $emailExists]);
     exit;
 }
-
+// Handle form submission for updating profile
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userName = $_POST["userName"] ?? '';
     $named = $_POST["named"] ?? '';
@@ -56,19 +55,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newPass = $_POST["newPass"] ?? '';
     $confirmNewPass = $_POST["confirmNewPass"] ?? '';
 
-    $stmt = $db->prepare("SELECT * FROM User WHERE id = :id");
+    $stmt = $db->prepare("SELECT * FROM User WHERE UserId = :id");
     $stmt->bindValue(':id', $userId, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($currentPass, $user['pass'])) {
+        // Check if new password is provided and matches confirmation
         if ($newPass !== '' && $newPass === $confirmNewPass) {
             $hashedPassword = password_hash($newPass, PASSWORD_DEFAULT);
         } else {
             $hashedPassword = $user['pass'];
         }
 
-        $stmt = $db->prepare("UPDATE User SET userName = :userName, named = :named, pass = :pass, email = :email WHERE id = :id");
+        // Update user information
+        $stmt = $db->prepare("UPDATE User SET userName = :userName, named = :named, pass = :pass, email = :email WHERE UserId = :id");
         $stmt->bindValue(':userName', $userName, PDO::PARAM_STR);
         $stmt->bindValue(':named', $named, PDO::PARAM_STR);
         $stmt->bindValue(':pass', $hashedPassword, PDO::PARAM_STR);
@@ -90,10 +91,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo json_encode(['message' => $message, 'success' => $success]);
     exit;
-}
-?>
+}?>
 
-<?php function drawProfileUpdate() { ?>
+
+<?php function drawProfileUpdate($currentUser) { ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,17 +132,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <br>
             <div class="input-wrapper">
-                <input type="password" id="newPass" name="newPass" class="information">
+                <input type="password" id="newPass" name="newPass" class="information" required onkeyup="checkPasswordMatch()">
                 <span>New Password (optional)</span>
             </div>
             <br>
             <div class="input-wrapper">
-                <input type="password" id="confirmNewPass" name="confirmNewPass" class="information">
+                <input type="password" id="confirmNewPass" name="confirmNewPass" class="information" required onkeyup="checkPasswordMatch()">
                 <span>Confirm New Password</span>
                 <button type="submit" id="updateButton" value="Update">&#10162;</button>
             </div>
             <br>
             <div id="message" style="color: green; font-weight: bold;"></div>
+            <div id="passwordMatchMessage" style="color: red; font-weight: bold;"></div><!-- Added element for password match message -->
         </form>
     </section>
     <script>
@@ -164,57 +166,74 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        function checkEmailAvailability() {
-            const email = $('#email').val();
-            if (email.length > 0) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'changeProfile.php',
-                    data: { checkEmail: email },
-                    success: function(response) {
-                        const data = JSON.parse(response);
-                        if (data.emailExists) {
-                            $('#emailMessage').text('Email is already taken.');
-                        } else {
-                            $('#emailMessage').text('');
-                        }
-                    }
-                });
+function checkEmailAvailability() {
+    const email = $('#email').val();
+    if (email.length > 0) {
+        $.ajax({
+            type: 'GET',
+            url: 'changeProfile.php',
+            data: { checkEmail: email },
+            success: function(response) {
+                const data = JSON.parse(response);
+                if (data.emailExists) {
+                    $('#emailMessage').text('Email is already taken.');
+                } else {
+                    $('#emailMessage').text('');
+                }
             }
+        });
+    }
+}
+
+function checkPasswordMatch() {
+    const pass = $('#newPass').val();
+    const confirmPass = $('#confirmNewPass').val();
+    if (pass.length > 0 && confirmPass.length > 0) {
+        if (pass !== confirmPass) {
+            $('#passwordMatchMessage').text('Passwords do not match.');
+        } else {
+            $('#passwordMatchMessage').text('');
         }
+    } else {
+        $('#passwordMatchMessage').text('');
+    }
+}
 
-        $(document).ready(function() {
-            $('#profileUpdateForm').on('submit', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: 'POST',
-                    url: 'changeProfile.php',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        const data = JSON.parse(response);
-                        $('#message').text(data.message);
-                        if (data.success) {
-                            $('#message').css('color', 'green');
-                        } else {
-                            $('#message').css('color', 'red');
-                        }
-                    }
-                });
-            });
-
-            // Fetch and fill user data
+    $(document).ready(function() {
+        $('#profileUpdateForm').on('submit', function(e) {
+            e.preventDefault();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: 'changeProfile.php',
-                dataType: 'json',
+                data: $(this).serialize(),
                 success: function(response) {
-                    $('#named').val(response.named);
-                    $('#userName').val(response.userName);
-                    $('#email').val(response.email);
+                    const data = JSON.parse(response);
+                    $('#message').text(data.message);
+                    if (data.success) {
+                        $('#message').css('color', 'green');
+                        $('#passwordMatchMessage').text('');
+                        setTimeout(() => {  window.location.href = 'profile.php'; }, 500);
+                    } else {
+                        $('#message').css('color', 'red');
+                    }
                 }
             });
         });
-    </script>
+
+        // Fetch and fill user data
+        $.ajax({
+            type: 'GET',
+            url: 'changeProfile.php',
+            dataType: 'json',
+            success: function(response) {
+                $('#named').val(response.named);
+                $('#userName').val(response.userName);
+                $('#email').val(response.email);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
 <?php } ?>
