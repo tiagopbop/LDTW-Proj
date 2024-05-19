@@ -12,9 +12,9 @@
   $user = user::getUserWithPassword($db, $_POST['email'], $_POST['username'], $_POST['password']);
 
   if ($user) {
-    $session->setId($user->userId);
+    $session->setId($user->UserId);
     $session->setUsername($user->userName);
-    $session->setRole($user->is_admin)
+    $session->setRole($user->is_admin);
     $session->addMessage('success', 'Login successful!');
   } else {
     $session->addMessage('error', 'Wrong password!');

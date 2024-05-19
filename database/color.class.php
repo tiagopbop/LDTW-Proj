@@ -25,5 +25,13 @@ class Color {
 
         return $colors;
     }
+
+    static function getColorNameById(PDO $db, int $id) : ?string {
+        $stmt = $db->prepare('SELECT colorName FROM Color WHERE colorId = ?');
+        $stmt-> execute([$id]);
+
+        $colorName = $stmt->fetchColumn();
+        return $colorName;
+    }
 }
 ?>

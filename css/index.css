@@ -10,6 +10,7 @@ body {
 }
 
 .logo {
+  
   width: 6vw;
 }
 
@@ -34,6 +35,7 @@ a {
   border-width: 0.2vh;
   border-style: solid;
   border-color: rgb(190, 190, 190);
+  border-radius: 10vh;
 }
 
 .home {
@@ -53,7 +55,7 @@ a {
   border: none;
   font-size: 1vw;
   background-color: rgb(238, 238, 238);
-  border-radius: 0.2vh;
+  border-radius: 10vh;
 }
 
 .register {
@@ -82,6 +84,7 @@ a {
   top: 3vh;
   left: 78vw;
   padding: 0.2vh;
+  border-radius: 1vh;
 }
 
 .unhovered {
@@ -98,7 +101,7 @@ a {
 .vehicles {
   width: 18.3vw;
   height: 21vh;
-  border-radius: 0.6vh;
+  border-radius: 20vh;
   position: absolute;
   top: 25vh;
 }
@@ -110,6 +113,7 @@ a {
   position: absolute;
   top: 15vh;
   border-bottom: 0.6vh solid rgb(199, 73, 0);
+  box-shadow: 0.1vw 0.1vw 0.3vh rgba(243, 89, 0, 0.562);
 }
 
 .terrain {
@@ -227,11 +231,11 @@ a {
   letter-spacing: 0.2vh;
   z-index: 4;
   position: absolute;
+  word-spacing: 0.1vw;
   width: 12vw;
   height: 5.4vh;
   border-radius: 0.5vh;
-  background-color: rgb(143, 143, 143);
-  border: 0.2vh solid white;
+  background-color: rgba(255, 255, 255, 0.719);
   text-align: center;
   padding: 1.2vh;
 }
@@ -279,8 +283,7 @@ a {
 footer {
   position: absolute;
   bottom: -90vh;
-  width: 99vw;
-  max-width: 99vw;
+  width: 100vw;
   height: 8vh;
   text-align: center;
   font-size: 1.1vw;

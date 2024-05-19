@@ -205,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $('#userNameMessage').text('');
                             $('#emailMessage').text('');
                             $('#passwordMatchMessage').text('');
-                            setTimeout(() => {  window.location.href = 'index.php'; }, 1000);
+                            setTimeout(() => {  window.location.href = 'index.php'; }, 500);
                         }
                     }
                 });

@@ -10,7 +10,7 @@ class Msg {
 
     public function __construct(int $chatId, int $UserId, string $when_sent, string $text_message) {
         $this->chatId = $chatId;
-        $this->userId = $userId;
+        $this->userId = $UserId;
         $this->when_sent = $when_sent;
         $this->text_message = $text_message;
     }

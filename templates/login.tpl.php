@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && password_verify($pass, $user['pass'])) {
         // Set session variables
-        $session->setId((int)$user['id']);
+        $session->setId((int)$user['UserId']);
         $session->setUsername($user['userName']);
         $message = "Login successful.";
         $success = true;

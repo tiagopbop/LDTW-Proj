@@ -58,7 +58,7 @@ function getImageById($db, $VehicleId) {
 
 <?php
 function drawResto($db, $vehicles) {
-?>
+    ?>
     <div class="line"></div>
     <section>
         <div class="decoration terra"></div>
@@ -81,40 +81,41 @@ function drawResto($db, $vehicles) {
     <div class="popup">TRENDING</div>
     <section class="wall">
         <div class="trending">
-        <?php foreach (array_slice($vehicles, 0, 3) as $vehicle): ?>
-    <?php
-    // Get the image file path for the current vehicle
-    $imagePath = getImageById($db, $vehicle->VehicleId);
-    ?>
-    <a href="item.php?VehicleId=<?= $vehicle->VehicleId ?>">
-        <img class="items" src="<?= $imagePath ? $imagePath : '../docs/placeholder.jpg' ?>" alt="Ad<?= $vehicle->VehicleId ?>">
-    </a>
-<?php endforeach; ?>
+            <?php 
+            $number = 0;
+            foreach (array_slice($vehicles, 0, 3) as $vehicle): ?>
+                <?php 
+                    $number++; 
+                ?>
+                <a href="item.php?id=<?= $vehicle->VehicleId?>">
+                    <img class="items" src="<?= '../productImages/' . $vehicle->VehicleId . '-1.jpg' ?>" alt="Ad<?= $vehicle->VehicleId ?>">
+                </a>
+                <p class="pop first ad<?= $number ?>">
+                    <?= htmlentities(getBrandName($db, $vehicle->BrandId)) ?> <?= htmlentities(getModelName($db, $vehicle->modelId)) ?> - $<?= htmlentities(number_format($vehicle->price, 2)) ?>
+                </p>
+            <?php endforeach; ?>
         </div>
-        <?php foreach (array_slice($vehicles, 0, 3) as $vehicle): ?>
-            <p class="pop first ad<?= $vehicle->VehicleId ?>">
-                <?= htmlentities(getBrandName($db, $vehicle->BrandId)) ?> <?= htmlentities(getModelName($db, $vehicle->modelId)) ?> - $<?= htmlentities(number_format($vehicle->price, 2)) ?>
-            </p>
-        <?php endforeach; ?>
-        <div class="trending">
-        <?php foreach (array_slice($vehicles, 3, 3) as $vehicle): ?>
-    <?php
-    // Get the image file path for the current vehicle
-    $imagePath = getImageById($db, $vehicle->VehicleId);
-    ?>
-    <a href="item.php?VehicleId=<?= $vehicle->VehicleId ?>">
-        <img class="items" src="<?= $imagePath ? $imagePath : '../docs/placeholder.jpg' ?>" alt="Ad<?= $vehicle->VehicleId ?>">
-    </a>
-<?php endforeach; ?>
-        </div>
-        <?php foreach (array_slice($vehicles, 3, 3) as $vehicle): ?>
-            <p class="pop second ad<?= $vehicle->VehicleId ?>">
-                <?= htmlentities(getBrandName($db, $vehicle->BrandId)) ?> <?= htmlentities(getModelName($db, $vehicle->modelId)) ?> - $<?= htmlentities(number_format($vehicle->price, 2)) ?>
-            </p>
-        <?php endforeach; ?>
+        <?php if (count($vehicles) > 3): ?>
+            <div class="trending">
+                <?php foreach (array_slice($vehicles, 3) as $vehicle): ?>
+                    <?php 
+                        $number++; 
+                    ?>
+                    <a href="item.php?id=<?= $vehicle->VehicleId?>">
+                        <img class="items" src="<?= '../productImages/' . $vehicle->VehicleId . '-1.jpg' ?>" alt="Ad<?= $vehicle->VehicleId ?>">
+                    </a>
+                    <p class="pop second ad<?= $number ?>">
+                        <?= htmlentities(getBrandName($db, $vehicle->BrandId)) ?> <?= htmlentities(getModelName($db, $vehicle->modelId)) ?> - $<?= htmlentities(number_format($vehicle->price, 2)) ?>
+                    </p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </section>
-<?php
-} ?>
+    <?php
+}
+?>
+
+
 
 <?php function drawFooter() { ?>
     </main>
