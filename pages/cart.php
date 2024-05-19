@@ -19,16 +19,34 @@
 
     $userId = Session::getId();
 
-    $wishlists = Wishlist::getUserWishlist($db, $userId);
-    $vehicles = [];
+    if ($userId != NULL) {
+        $wishlists = Wishlist::getUserWishlist($db, $userId);
+    }
+    else {
+        $vehicles = [];
+    }
+
+    
 
     foreach ($wishlists as $wishlist) {
         $vehicles[] = Vehicle::getVehicle($db, $wishlist->VehicleId);
     }
+    
+    $user = $userId !== null ? User::getUser($db, (int)$userId) : null;
 
-
-    drawHeader($session, $user);
-    drawCart($db, $vehicles);
+    if ($userId != NULL) {
+        $user = User::getUser($db, $userId);
+        drawHeader($session, $user);
+    }
+    else {
+        drawHeader($session, $user=NULL);
+    }
+    if ($vehicles != NULL) {
+        drawCart($db, $vehicles);
+    }
+    else {
+        drawCart($db, $vehicles=NULL);
+    }
     drawFooter();
 ?>
 
