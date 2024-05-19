@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
@@ -15,23 +15,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $db = getDatabaseConnection();
 
-    // Prepare and execute a query to find the user by username or email
-    $stmt = $db->prepare("SELECT * FROM User WHERE userName = :userNameOrEmail OR email = :userNameOrEmail");
-    $stmt->bindValue(':userNameOrEmail', $userNameOrEmail, PDO::PARAM_STR);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($pass, $user['pass'])) {
-        // Set session variables
-        $session->setId((int)$user['UserId']);
-        $session->setUsername($user['userName']);
-        $message = "Login successful.";
-        $success = true;
-    } else {
-        $message = "Invalid username/email or password.";
-        $success = false;
+    // Function to check if a user exists by username or email
+    function checkUserExists($userNameOrEmail, $db): bool {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM User WHERE is_admin != 1 AND userName = :userNameOrEmail OR email = :userNameOrEmail");
+        $stmt->bindValue(':userNameOrEmail', $userNameOrEmail, PDO::PARAM_STR);
+        $stmt->execute();
+        $count = (int)$stmt->fetchColumn();
+        return $count > 0;
     }
 
+    // Check if user exists by username or email
+    if (checkUserExists($userNameOrEmail, $db)) {
+        // Update the is_admin value if the user exists
+        $stmt = $db->prepare("UPDATE User SET is_admin = 1 WHERE userName = :userNameOrEmail OR email = :userNameOrEmail");
+        $stmt->bindValue(':userNameOrEmail', $userNameOrEmail, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $message = "User exists. Press Enter to create admin.";
+        $success = true; // Corrected to true
+    } else{
+        $message = "User/email does not exist.";
+        $success = false;
+    }
+    
+
+    // Close database connection
     $db = null;
 
     echo json_encode(['message' => $message, 'success' => $success]);
@@ -39,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php function drawCreateAdmin() { ?>
+<?php function drawCreateAdmin($id) { ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,11 +72,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </section>
     <script>
         $(document).ready(function() {
+            let typingTimer;
+            const doneTypingInterval = 500; // 0.5 second
+
+            // On keyup, start the countdown
+            $('#userNameOrEmail').on('keyup', function() {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(checkUserExists, doneTypingInterval);
+            });
+
+            // On keydown, clear the countdown
+            $('#userNameOrEmail').on('keydown', function() {
+                clearTimeout(typingTimer);
+            });
+
+            // Function to check user existence and display message
+            function checkUserExists() {
+                const userNameOrEmail = $('#userNameOrEmail').val().trim();
+                if (userNameOrEmail !== '') {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'createAdmin.php',
+                        data: { userNameOrEmail: userNameOrEmail },
+                        success: function(response) {
+                            const data = JSON.parse(response);
+                            $('#message').text(data.message);
+                            if (data.success) {
+                                $('#message').css('color', 'green');
+                            } else {
+                                $('#message').css('color', 'red');
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Form submission handler
             $('#loginForm').on('submit', function(e) {
                 e.preventDefault();
                 $.ajax({
                     type: 'POST',
-                    url: 'login.php',
+                    url: 'createAdmin.php',
                     data: $(this).serialize(),
                     success: function(response) {
                         const data = JSON.parse(response);

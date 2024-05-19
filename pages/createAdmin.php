@@ -10,6 +10,6 @@
     require_once(__DIR__ . '/../templates/createAdmin.tpl.php');
 
     drawHeader($session);
-    drawCreateAdmin();
+    drawCreateAdmin(Session::getId());
     drawFooter();
 ?>
