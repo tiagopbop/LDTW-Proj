@@ -10,7 +10,9 @@
 
     git clone git@github.com:FEUP-LTW-2024/ltw-project-2024-ltw13g03.git
     git checkout final-delivery-v1
+    cd database/
     sqlite3 store.db < store.sql
+    cd ..
     php -S localhost:9000
 
 ## Screenshots
