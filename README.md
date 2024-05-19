@@ -49,7 +49,7 @@
 **Admins**  should be able to:
 
 - [x] Elevate a user to admin status.
-- [x] Introduce new item categories, sizes, conditions, and other pertinent entities.
+- [ ] Introduce new item categories, sizes, conditions, and other pertinent entities.
 - [x] Oversee and ensure the smooth operation of the entire system.
 
 **Security**:
