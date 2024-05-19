@@ -96,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <div id="message" style="color: yellow; z-index: 10; font-size: 10vw; height: 20vh;"></div>
         <section>
             <img class="logoinv" src="../docs/LogoInv.png" alt="Logo">
             <form id="registrationForm" method="POST" class="registerForm">
@@ -184,6 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $('#registrationForm')[0].reset();
                             $('#userNameMessage').text('');
                             $('#emailMessage').text('');
+                            setTimeout(() => {  window.location.href = 'index.php'; }, 1000);
                         }
                     }
                 });
