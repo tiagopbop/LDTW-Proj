@@ -17,7 +17,7 @@
             session_destroy();
         }
 
-        public function getId() : ?int {
+        static public function getId() : ?int {
             return isset($_SESSION['id']) ? $_SESSION['id'] : null;
         }
 
@@ -25,7 +25,7 @@
             return isset($_SESSION['username']) ? $_SESSION['username'] : null;
         }
 
-        public function setId(int $id) {
+        static public function setId(int $id) {
             $_SESSION['id'] = $id;
         }
 
