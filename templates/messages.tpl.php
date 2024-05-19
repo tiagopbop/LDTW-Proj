@@ -9,13 +9,13 @@
     </head>
     <body>
         <section class="wall">
-            <div class="line"></div>
+            <div class="liney"></div>
             <section class="profiles">
                 <img class="pfp" src="../docs/placeholder.jpg" alt="Pfp1">
-                <span>Àlvaro Pinto</span>
+                <span class="people">Àlvaro Pinto</span>
                 <br>
                 <img class="pfp" src="../docs/placeholder.jpg" alt="Pfp2">
-                <span>Jessica Priscilla</span>
+                <span class="people">Jessica Priscilla</span>
             </section>
             <section class="chats">
             </section>

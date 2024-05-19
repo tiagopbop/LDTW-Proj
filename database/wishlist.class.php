@@ -21,7 +21,7 @@
             $stmt->execute();
         
             $wishlistV = [];
-            while ($wishlist = $stmt->fetch()) {
+            while ($wishlist = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $wishlistV[] = new Wishlist(
                     $wishlist['userId'],
                     $wishlist['vehicleId']

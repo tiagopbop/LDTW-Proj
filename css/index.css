@@ -222,7 +222,7 @@ a {
   transform: translatey(0px);
   animation: float 4s ease-in-out infinite;
 
-  font-size: 1vw;
+  font-size: 0.8vw;
   font-weight: bold;
   letter-spacing: 0.2vh;
   z-index: 4;
@@ -280,7 +280,7 @@ footer {
   position: absolute;
   bottom: -90vh;
   width: 99vw;
-  max-width: 99vw;;
+  max-width: 99vw;
   height: 8vh;
   text-align: center;
   font-size: 1.1vw;

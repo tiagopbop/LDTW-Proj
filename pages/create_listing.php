@@ -13,11 +13,13 @@
     require_once(__DIR__ . '/../templates/selling.tpl.php');
 
     $db = getDatabaseConnection();
-    $stmt = $db->query("SELECT * FROM Category");
 
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $categories = Category::getCategories($db);
+    $brands = Brand::getBrands($db);
+    $colors = Color::getColors($db);
+
     drawHeader($session);
-    drawCreateListing($categories);
+    drawCreateListing($categories, $brands, $colors);
     drawFooter();
 
 ?>

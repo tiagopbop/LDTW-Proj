@@ -21,7 +21,7 @@ CREATE TABLE User(
     named NVARCHAR(100) NOT NULL,
     pass NVARCHAR(100) NOT NULL,
     email NVARCHAR(100) NOT NULL,
-    is_admin INTEGER NOT NULL
+    is_admin BOOLEAN NOT NULL
 );
 
 CREATE TABLE Brand(
@@ -68,7 +68,7 @@ CREATE TABLE Vehicle(
     kilometers INTEGER,
     fuelType INTEGER NOT NULL CHECK(fuelType > 0 AND fuelType < 5),
     FOREIGN KEY(UserId) REFERENCES User(UserId),
-    FOREIGN KEY(typeId) REFERENCES Types(typeId), 
+    FOREIGN KEY(typeId) REFERENCES Types(typeId),
     FOREIGN KEY(BrandId, modelId) REFERENCES Model(BrandId, modelId),
     FOREIGN KEY(colorId) REFERENCES Color(colorId)
 );
@@ -85,7 +85,7 @@ CREATE TABLE Wishlist(
     VehicleId INTEGER,
     FOREIGN KEY (UserId) REFERENCES User(UserId),
     FOREIGN KEY (VehicleId) REFERENCES Vehicle(VehicleId),
-    PRIMARY KEY(UserId,VehicleId)
+    PRIMARY KEY(UserId, VehicleId)
 );
 
 CREATE TABLE Shopcar(
@@ -93,7 +93,7 @@ CREATE TABLE Shopcar(
     VehicleId INTEGER,
     FOREIGN KEY (UserId) REFERENCES User(UserId),
     FOREIGN KEY (VehicleId) REFERENCES Vehicle(VehicleId),
-    PRIMARY KEY(UserId,VehicleId)
+    PRIMARY KEY(UserId, VehicleId)
 );
 
 CREATE TABLE Trans(
@@ -139,15 +139,15 @@ CREATE TABLE Review(
 
 PRAGMA foreign_keys = ON;
 
--- Inserções de exemplo usando a função datetime
+-- Insert example data
 
 INSERT INTO User (UserId, userName, named, pass, email, is_admin) 
 VALUES 
-    (1,'john_doe', 'hihi', 'password123', 'john@example.com', 1),
-    (2,'jane_smith','rawr', 'pass123', 'jane@example.com', 0),
-    (3,'alex_brown','pepapig', 'securepass', 'alex@example.com', 0),
-    (4,'emma_davis','oiledman', 'password', 'emma@example.com', 0),
-    (5,'michael_wilson', 'yessir','p@$$w0rd', 'michael@example.com', 0);
+    (1,'john_doe', 'joao', 'password123', 'john@example.com', 1),
+    (2,'jane_smith', 'joana', 'pass123', 'jane@example.com', 0),
+    (3,'alex_brown', 'alexandre', 'securepass', 'alex@example.com', 0),
+    (4,'emma_davis', 'emilia', 'password', 'emma@example.com', 0),
+    (5,'michael_wilson', 'micael', 'p@$$w0rd', 'michael@example.com', 0);
 
 INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
 VALUES 
@@ -163,28 +163,25 @@ VALUES
     (2, 'Water', '/path/to/sedan_category.png'),
     (3, 'Air', '/path/to/truck_category.png');
 
-
 INSERT INTO Types (typeId, typeName, categoryId) 
 VALUES 
-    (1,'Car', 1),
-    (2,'Bike', 1),
-    (3,'Truck', 1),
-    (4,'Boat', 2),
-    (5,'Submarine', 2),
-    (6,'Waterbike', 2),
-    (7,'Plane', 3),
-    (8,'Helicopter', 3),
-    (9,'Rocket', 3);
+    (1, 'Car', 1),
+    (2, 'Bike', 1),
+    (3, 'Truck', 1),
+    (4, 'Boat', 2),
+    (5, 'Submarine', 2),
+    (6, 'Waterbike', 2),
+    (7, 'Plane', 3),
+    (8, 'Helicopter', 3),
+    (9, 'Rocket', 3);
 
-
-
-INSERT INTO Model (modelId, BrandId, modelName) 
+INSERT INTO Model (BrandId, modelId, modelName) 
 VALUES 
     (1, 1, 'Camry'),
-    (2, 2, 'Corolla'),
-    (3, 3, 'Accord'),
-    (4, 4, 'Fusion'),
-    (5, 5, 'Malibu');
+    (2, 2, 'Civic'),
+    (3, 3, 'F-150'),
+    (4, 4, 'Silverado'),
+    (5, 5, 'X5');
 
 INSERT INTO Color (colorId, colorName) 
 VALUES 
@@ -194,13 +191,23 @@ VALUES
     (4, 'White'),
     (5, 'Silver');
 
-INSERT INTO Vehicle (VehicleId,UserId, typeId, BrandId, modelId, colorId, price, condition, kilometers, fuelType) 
+INSERT INTO Vehicle (VehicleId, UserId, typeId, BrandId, modelId, colorId, price, condition, kilometers, fuelType) 
 VALUES 
-    (1,1, 1, 1, 1, 1, 25000, 4, 50000, 2),
-    (2,2, 2, 2, 2, 2, 30000, 3, 60000, 3),
-    (3,3, 3, 3, 3, 3, 35000, 2, 70000, 4),
-    (4,4, 4, 4, 4, 4, 40000, 1, 80000, 1),
-    (5,5, 5, 5, 5, 5, 45000, 5, 90000, 2);
+    (1, 1, 1, 1, 1, 1, 25000, 4, 50000, 2),
+    (2, 2, 2, 2, 2, 2, 30000, 3, 60000, 3),
+    (3, 3, 3, 3, 3, 3, 35000, 2, 70000, 4),
+    (4, 4, 4, 4, 4, 4, 40000, 1, 80000, 1),
+    (5, 5, 5, 5, 5, 5, 45000, 5, 90000, 2),
+    (6, 5, 3, 3, 3, 3, 23000, 3, 90000, 2);
+
+INSERT INTO Images (VehicleId, imageFilePath) 
+VALUES 
+    (1, '../images/Screenshot_1.png'),
+    (2, '../images/carro-fixa.png'),
+    (3, '../images/day-exterior-04_2tb.png'),
+    (4, '../images/modelosv3_xceed-phev.png'),
+    (5, '../images/pad_screenshot.png'),
+    (6, '../images/washer2.png');
 
 INSERT INTO Wishlist (UserId, VehicleId) 
 VALUES 
@@ -236,16 +243,16 @@ VALUES
 
 INSERT INTO Msg (MessageId, ChatId, UserId, when_sent, text_message) 
 VALUES 
-    (1, 1, 1, datetime('now'), 'Hello, I am interested in your vehicle.'),
-    (2, 2, 2, datetime('now'), 'Sure, let me know if you have any questions.'),
-    (3, 3, 3, datetime('now'), 'I can offer you a discount if you buy today.'),
-    (4, 4, 4, datetime('now'), 'I need more information about the maintenance history.'),
-    (5, 5, 5, datetime('now'), 'Is the price negotiable?');
+    (1, 1, 1, '2024-01-01 10:00:00', 'Hello!'),
+    (2, 2, 2, '2024-01-01 11:00:00', 'Hi!'),
+    (3, 3, 3, '2024-01-01 12:00:00', 'Good day!'),
+    (4, 4, 4, '2024-01-01 13:00:00', 'Good afternoon!'),
+    (5, 5, 5, '2024-01-01 14:00:00', 'Good evening!');
 
 INSERT INTO Review (ReviewId, UserId, VehicleId, Rating, Comment) 
 VALUES 
-    (1, 1, 1, 4, 'Great car, very satisfied with the purchase.'),
-    (2, 2, 2, 5, 'Excellent service and quality.'),
-    (3, 3, 3, 3, 'Decent vehicle, had some issues.'),
-    (4, 4, 4, 2, 'Not happy with the purchase, had to return.'),
-    (5, 5, 5, 4, 'Good experience overall, would recommend.');
+    (1, 1, 1, 5, 'Great vehicle!'),
+    (2, 2, 2, 4, 'Good car.'),
+    (3, 3, 3, 3, 'Average.'),
+    (4, 4, 4, 2, 'Not satisfied.'),
+    (5, 5, 5, 1, 'Poor condition.');

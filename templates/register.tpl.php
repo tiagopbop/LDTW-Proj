@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="email" id="email" name="email" class="information" required onkeyup="checkEmailAvailability()">
                     <span>Email </span>
                 </div>
-                <span id="emailMessage" style="color: yellow; z-index: 10; font-size: 10vw; height: 20vh;"></span><br>
+                <span id="emailMessage" style="color: red;"></span><br>
                 <br>
                 <div class="input-wrapper">
                     <input type="password" id="pass" name="pass" class="information" required>
@@ -126,6 +126,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span>Confirm Password</span>
                     <button type="submit" id="registerButton" value="Register">&#10162;</button>
                 </div>
+                <br>
+                <div id="message" style="color: green;"></div>
             </form>
         </section>
     </body>

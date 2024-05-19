@@ -1,79 +1,8 @@
-body {
-    margin: 0px;
-    padding: 0px;
-    background-color: rgb(15, 15, 15);
-    box-sizing: border-box;
-    overflow: hidden;
+  html {
+    height: 100vh;
   }
   
-  header {
-    background-color: black;
-    font-family: 'Times New Roman', serif;
-    border-bottom: 0.5vh double rgb(190, 190, 190);
-    height: 14vh;
-  }
-
-  .logo {
-    width: 10vw;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  .nav {
-    color: rgb(255, 255, 255);
-    font-size: 1vw;
-    text-align: center;
-    line-height: 4vh;
-    position: absolute;
-    height: 4.2vh;
-    top: 3vh;
-    border-width: 0.2vh;
-    border-style: solid;
-    border-color: white;
-  }
-  
-  .home {
-    width: 12vw;
-    left: 13.75vw;
-  }
-  
-  .website_logo input[type=text] {
-    position: absolute;
-    width: 35vw;
-    height: 3vh;
-    left: 30.5vw;
-    top: 2.35vh;
-    padding: 0.63vh;
-    margin-top: 0.72vh;
-    margin-right: 1vh;
-    border: none;
-    font-size: 1vw;
-    background-color: rgb(238, 238, 238);
-    border-radius: 0.2vh;
-  }
-  
-  .register {
-    width: 6vw;
-    left: 90.5vw;
-  }
-
-  .messages {
-    width: 6vw;
-    left: 70.2vw;
-  }
-  
-  .login {
-    width: 6vw;
-    left: 82vw;
-  }
-  
-  .home:hover,.login:hover,.register:hover,.messages:hover{
-    background-color: rgba(61, 61, 61, 0.5);
-  }
-
-  .wall {
+  .wally {
     z-index: 1;
     position: absolute;
     top: 18vh;
@@ -87,37 +16,37 @@ body {
     overflow-y: scroll;
   }
 
-  .items {
+  .itemsy {
     text-align: left;
     padding: 0.6vw;
     width: 8vw;
   }
 
-  .first {
+  .firsty {
     top: 9.5vh;
   }
 
-  .second {
-    top: 23.8vh;
+  .secondy {
+    top: 25vh;
   }
 
-  .third {
-    top: 38.1vh;
+  .thirdy {
+    top: 40.5vh;
   }
 
-  .forth {
-    top: 52.4vh;
+  .forthy {
+    top: 56vh;
   }
 
-  .fifth {
-    top: 66.7vh;
+  .fifthy {
+    top: 71.5vh;
   }
 
-  .sixth {
-    top: 81vh;
+  .sixthy {
+    top: 87vh;
   }
 
-  .line {
+  .linei {
     padding: 0.3vw;
     position: absolute;
     border-bottom: 0.2vh solid rgb(230, 230, 230);
@@ -131,14 +60,5 @@ body {
   }
 
   footer {
-    position: absolute;
     bottom: 0vh;
-    width: 100vw;
-    height: 8vh;
-    text-align: center;
-    font-size: 1.1vw;
-    color: white;
-    font-style: italic;
-    opacity: 40%;
-    background-color: rgb(29, 29, 29);
   }

@@ -27,7 +27,7 @@
             <span class="price">16.000 €</span>
             <a class="message" href="../pages/messages.php">Message</a>
             <img class="wishlist" src="../docs/shopping_cart_icon.png" alt="Wishlist">
-            <span class="pop">Add to wishlist?</span>
+            <span class="popi">Add to wishlist?</span>
         </section>
         <span class="comments">Comments (0)</span>
         <div class="linha"></div>
