@@ -2,9 +2,7 @@
 require_once(__DIR__ . '/../database/connection.php');
 
 // Function to draw messages
-function drawMessages($db,$currentUser) {
-
-
+function drawMessages($db, $currentUser) {
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -32,6 +30,8 @@ function drawMessages($db,$currentUser) {
                 $stmt->execute();
                 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
                 // Display profiles of users
                 foreach ($users as $user) {
                     echo '<div class="profile" data-user-id="' . htmlspecialchars($user['UserId']) . '">';
@@ -41,7 +41,7 @@ function drawMessages($db,$currentUser) {
                 }
                 ?>
             </section>
-            <section class="chats">
+            <section class="chats" data-chat-id="" data-recipient-id="">
             </section>
             <input type="text" class="write" placeholder="Message">
         </section>
@@ -60,6 +60,8 @@ function drawMessages($db,$currentUser) {
                         data: { currentUser: <?php echo $currentUser; ?>, UserId: UserId },
                         success: function(messagesResponse) {
                             $('.chats').html(messagesResponse);
+                            $('.chats').data('chat-id', messagesResponse.ChatId);  // Assuming fetch_messages.php returns ChatId
+                            $('.chats').data('recipient-id', UserId);
                         },
                         error: function(xhr, status, error) {
                             console.error(error);
@@ -72,7 +74,10 @@ function drawMessages($db,$currentUser) {
                     if (e.which === 13) {
                         var message = $(this).val().trim();
                         if (message !== '') {
-                            var chatId = $('.chats').data('chat-id');
+
+
+
+
                             var UserId = $('.chats').data('recipient-id');
                             
                             // Send the message to the server
@@ -80,16 +85,20 @@ function drawMessages($db,$currentUser) {
                                 type: 'POST',
                                 url: '../database/send_message.php',
                                 data: {
-                                currentUser: <?php echo $currentUser; ?>,
-                                UserId: UserId,
-                                message: message
-                            },        
-
-                              success: function(response) {
-                                    // Update the chat interface with the new message
-                                    $('.chats').append('<div class="message">' + message + '</div>');
-                                    $('.chats').scrollTop($('.chats')[0].scrollHeight);
-                                    $('.write').val(''); // Clear the input field
+                                    currentUser: <?php echo $currentUser; ?>,
+                                    UserId: UserId,
+                                    message: message
+                                },
+                                success: function(response) {
+                                    var jsonResponse = JSON.parse(response);
+                                    if (jsonResponse.success) {
+                                        // Update the chat interface with the new message
+                                        $('.chats').append('<div class="message">' + message + '</div>');
+                                        $('.chats').scrollTop($('.chats')[0].scrollHeight);
+                                        $('.write').val(''); // Clear the input field
+                                    } else {
+                                        console.error(jsonResponse.message);
+                                    }
                                 },
                                 error: function(xhr, status, error) {
                                     console.error(error);

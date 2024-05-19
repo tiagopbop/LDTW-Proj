@@ -27,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['currentUser']) && isse
         $chat = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($chat) {
-            $chatId = $chat['ChatId'];
-
+            $ChatId = $chat['ChatId'];
+            
             // Fetch all messages for the retrieved chat ID
             try {
                 // Prepare the SQL query to retrieve messages
-                $stmt = $db->prepare("SELECT * FROM Msg WHERE ChatId = :chatId");
-                $stmt->bindParam(':chatId', $chatId, PDO::PARAM_INT);
+                $stmt = $db->prepare("SELECT * FROM Msg WHERE ChatId = :ChatId");
+                $stmt->bindParam(':ChatId', $ChatId, PDO::PARAM_INT);
                 $stmt->execute();
                 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

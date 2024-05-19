@@ -120,7 +120,6 @@ CREATE TABLE Msg(
     MessageId INTEGER PRIMARY KEY NOT NULL,
     ChatId INTEGER,
     UserId INTEGER,
-    when_sent DATETIME NOT NULL,
     text_message NVARCHAR(500) NOT NULL,
     FOREIGN KEY (ChatId) REFERENCES Chat(ChatId),
     FOREIGN KEY (UserId) REFERENCES User(UserId)
@@ -241,13 +240,13 @@ VALUES
     (4, 4, 5),
     (5, 5, 1);
 
-INSERT INTO Msg (MessageId, ChatId, UserId, when_sent, text_message) 
+INSERT INTO Msg (MessageId, ChatId, UserId, text_message) 
 VALUES 
-    (1, 1, 1, '2024-01-01 10:00:00', 'Hello!'),
-    (2, 2, 2, '2024-01-01 11:00:00', 'Hi!'),
-    (3, 3, 3, '2024-01-01 12:00:00', 'Good day!'),
-    (4, 4, 4, '2024-01-01 13:00:00', 'Good afternoon!'),
-    (5, 5, 5, '2024-01-01 14:00:00', 'Good evening!');
+    (1, 1, 1, 'Hello!'),
+    (2, 2, 2, 'Hi!'),
+    (3, 3, 3,'Good day!'),
+    (4, 4, 4, 'Good afternoon!'),
+    (5, 5, 5, 'Good evening!');
 
 INSERT INTO Review (ReviewId, UserId, VehicleId, Rating, Comment) 
 VALUES 
