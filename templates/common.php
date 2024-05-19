@@ -132,28 +132,6 @@ function drawResto($db, $vehicles) {
 <?php } ?>
 
 <?php function logInTrue() { ?>
-    <a class="nav login" href="../pages/additem.php">Add item</a>
+    <a class="nav login" href="../pages/create_listing.php">Add item</a>
     <a class="nav register" href="../pages/profile.php">Profile</a>
-<?php } ?>
-
-<?php function drawLogIn() { ?>
-    <section>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="../css/login.css" rel="stylesheet">
-            <img class="logoinv" src="../docs/LogoInv.png" alt="Logo">
-            <form>
-                <div class="input-wrapper">
-                    <input type="text" required>
-                    <span>Email or Username</span>
-                </div>
-                <br>
-                <div class="input-wrapper">
-                    <input type="text" required>
-                    <span>Password</span>
-                    <button type="submit">&#10162;</button>
-                </div>
-            </form>
-        </section>
-</html>
 <?php } ?>
