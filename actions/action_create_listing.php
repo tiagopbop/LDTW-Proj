@@ -4,14 +4,13 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../database/connection.php'); // Make sure you have a script to establish a database connection
 require_once(__DIR__ . '/../utils/session.php');
 
+    $session = new Session();
+
+require_once(__DIR__ . '/../database/vehicle.class.php');
+require_once(__DIR__ . '/../database/user.class.php');
+
+
 try {
-
-    
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-        Session::setId(2);
-    }
-
 
     
     // Establish a database connection
@@ -19,7 +18,7 @@ try {
 
 
     // Get and sanitize form data
-    $userId = intval(Session::getId());
+    $UserId = intval($session->getId());
     $typeId = intval($_POST['types']);
     $brandId = intval($_POST['brand']);
     $modelId = intval($_POST['model']);
@@ -32,10 +31,10 @@ try {
     // Prepare and execute the SQL statement
     $stmt = $db->prepare('
         INSERT INTO Vehicle (UserId, typeId, BrandId, modelId, colorId, price, condition, kilometers, fuelType)
-        VALUES (:userId, :typeId, :brandId, :modelId, :colorId, :price, :condition, :kilometers, :fuelType)
+        VALUES (:UserId, :typeId, :brandId, :modelId, :colorId, :price, :condition, :kilometers, :fuelType)
     ');
 
-    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':UserId', $UserId, PDO::PARAM_INT);
     $stmt->bindParam(':typeId', $typeId, PDO::PARAM_INT);
     $stmt->bindParam(':brandId', $brandId, PDO::PARAM_INT);
     $stmt->bindParam(':modelId', $modelId, PDO::PARAM_INT);

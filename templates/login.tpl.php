@@ -4,8 +4,6 @@ declare(strict_types = 1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
-
-
 require_once(__DIR__ . '/../database/connection.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
@@ -25,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && password_verify($pass, $user['pass'])) {
         // Set session variables
-        $session->setId((int)$user['id']);
+        $session->setId((int)$user['UserId']);
         $session->setUsername($user['userName']);
         $message = "Login successful.";
         $success = true;
@@ -40,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 ?>
-
 
 <?php function drawLogIn() { ?>
 <!DOCTYPE html>
@@ -82,12 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         const data = JSON.parse(response);
                         $('#message').text(data.message);
                         if (data.success) {
-                            $('#message').css('color', 'green');
                             $('#loginForm')[0].reset();
                             // Redirect to another page on successful login
-                            setTimeout(() => {  window.location.href = 'index.php'; }, 500);
-                        } else {
-                            $('#message').css('color', 'red');
+                            window.location.href = 'index.php';
                         }
                     }
                 });

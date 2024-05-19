@@ -4,6 +4,7 @@
         
         public function __construct() {
             session_start();
+            var_dump($_SESSION);
 
             $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
             unset($_SESSION['messages']);
@@ -34,11 +35,11 @@
             $_SESSION['username'] = $username;
         }
 
-        public function setRole(bool $role) {
+        public function setRole(int $role) {
             $_SESSION['role'] = $role;
         }
 
-        public function isAdmin() : bool {
+        public function isAdmin() : int {
             if (!$this->isLoggedIn()) {
                 return false;
             }
