@@ -7,20 +7,8 @@
         <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
     </head>
     <body>
-        <header class="website_logo">
-            <div class="top_page">
-                <img class="logo" src="../docs/Logo.jpg" alt="Logo">
-                <a class="nav home" href="../pages/index.php">Home</a>
-                <input type="text" placeholder="Search">
-                <a class="nav messages" href="../pages/messages.php">Messages</a>
-                <a class="cart trans" href="../pages/cart.php"></a>
-                <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
-                <a class="nav login" href="../pages/login.php">Login</a>
-                <a class="nav register" href="../pages/register.php">Register</a>
-            </div>
-        </header>
         <img class="item" src="../docs/placeholder.jpg" alt="Ad4">
-        <section class="wall">
+        <section class="wally">
             <span class="product">Very cool car</span>
             <span class="owner">Mateus rodrigues</span>
             <span class="description">Description</span>

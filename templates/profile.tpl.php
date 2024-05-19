@@ -9,23 +9,18 @@
     <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
 </head>
 <body>
-    <header class="website_logo">
-        <div class="top_page">
-            <img class="logo" src="../docs/Logo.jpg" alt="Logo">
-            <a class="nav home" href="../pages/index.php">Home</a>
-            <input type="text" placeholder="Search">
-            <a class="nav messages" href="../pages/messages.php">Messages</a>
-            <a class="cart trans" href="../pages/cart.php"></a>
-            <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
-            <a class="nav additem" href="../pages/additem.php">Add item</a>
-        </div>
-    </header>
     <section class="wall">
-        <img class="pfp" src="../docs/pfp_placeholder.png" alt="Profile Picture">
-        <span class="username">Julius César</span>
-        <span class="username_change">Edit username</span>
+    <img class="pfp" src="../docs/pfp_placeholder.png" alt="pfp">
+            <span class="data name">Julius César</span>
+            <span class="change nm">Edit name</span>
+            <span class="data username">GatinhoNeon123</span>
+            <span class="change usr">Edit username</span>
+            <span class="data email">email_exemplo@arroba.com</span>
+            <span class="change eml">Edit email</span>
+            <span class="data password">Wuant123</span>
+            <span class="change psswrd">Edit password</span>
         <form method="POST" action="../pages/logout.php" style="display:inline;">
-            <button type="submit" class="logout">Logout</button>
+            <button class="logout" type="submit" class="logout">Logout</button>
         </form>
     </section>
 </body>
