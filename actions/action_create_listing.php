@@ -2,14 +2,24 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.php'); // Make sure you have a script to establish a database connection
+require_once(__DIR__ . '/../utils/session.php');
 
 try {
+
+    
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        Session::setId(2);
+    }
+
+
+    
     // Establish a database connection
-    $db = new PDO('sqlite:../database/store.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db = getDatabaseConnection();
+
 
     // Get and sanitize form data
-    $userId = 1; // Example user ID, replace with actual user ID from session or authentication system
+    $userId = intval(Session::getId());
     $typeId = intval($_POST['types']);
     $brandId = intval($_POST['brand']);
     $modelId = intval($_POST['model']);
@@ -36,6 +46,33 @@ try {
     $stmt->bindParam(':fuelType', $fuelType, PDO::PARAM_INT);
 
     $stmt->execute();
+
+    $vehicleId = $db->lastInsertId();
+
+    $imagesDir = __DIR__ . '/../productImages';
+    if (!is_dir($imagesDir)) {
+        if (!mkdir($imagesDir, 0777, true)) {
+            throw new Exception('Failed to create directory: ' . $imagesDir);
+        }
+    }
+
+    $imageNumber = 1;
+    foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+        // Convert the image to JPEG format
+        $image = imagecreatefromstring(file_get_contents($tmpName));
+        $fileName = $vehicleId . '-' . $imageNumber . '.jpg';
+        $destination = $imagesDir . '/' . $fileName;
+
+        // Save the JPEG image
+        if (imagejpeg($image, $destination)) {
+            $imageNumber++;
+        } else {
+            throw new Exception('Failed to save image: ' . $fileName);
+        }
+
+        // Free up memory
+        imagedestroy($image);
+    }
 
     // Redirect or notify the user after successful insertion
     header('Location: ../pages/index.php');
