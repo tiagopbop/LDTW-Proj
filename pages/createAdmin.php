@@ -9,7 +9,7 @@
     
     require_once(__DIR__ . '/../templates/createAdmin.tpl.php');
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawCreateAdmin(Session::getId());
     drawFooter();
 ?>

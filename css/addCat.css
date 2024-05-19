@@ -1,0 +1,81 @@
+
+html {
+    height: 100vh;
+  }
+  
+  .trans {
+    background-color: transparent;
+    z-index: 4;
+  }
+  
+  .wall {
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    top: 21vh;
+    left: 26.5vw;
+    height: 63vh;
+    width: 46.3vw;
+    border-radius: 0.8vh;
+    border-top: 0.2vh solid rgb(224, 224, 224);
+    background-color: rgb(27, 27, 27);
+  }
+
+  .image {
+    width: 16vw;
+    position: absolute;
+    left: 3vw;
+    top: 16vh;
+    height: 22.9vh;
+    z-index: 10;
+    opacity: 0%;
+    cursor: pointer;
+  }
+
+  .input_image {
+    width: 16vw;
+    position: absolute;
+    left: 3vw;
+    top: 16vh;
+    height: 22.9vh;
+    z-index: 1;
+  }
+
+  label {
+    color: white;
+  }
+
+  .block {
+    width: 20vw;
+    text-align: left;
+    font-size: 1.1vw;
+    float: right;
+    padding: 1.6vw;
+    line-height: 2.2vw;
+    background-color: rgb(31, 31, 31);
+    border-radius: 4vw;
+    right: 2vw;
+    margin: 0.8vw;
+  }
+
+  .transp {
+    opacity: 0%;
+    z-index: 2;
+    width: 16vw;
+    position: absolute;
+    left: 3vw;
+    top: 16vh;
+    height: 22.8vh;
+    font-size: 2vw;
+    background-color: rgba(32, 32, 32, 0.247);
+    cursor: pointer;
+    line-height: 22.75vh;
+  }
+
+  .image:hover + .transp {
+    opacity: 100%;
+  }
+
+  footer {
+    bottom: 0vh;
+  }

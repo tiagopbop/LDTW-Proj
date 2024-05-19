@@ -14,7 +14,7 @@ require_once(__DIR__ . '/../templates/messages.tpl.php');
 
 $db = getDatabaseConnection();
 
-drawHeader($session);
+drawHeader($session, $user);
 drawMessages($db, 6); // Assuming you want to pass a user ID here
 drawFooter();
 

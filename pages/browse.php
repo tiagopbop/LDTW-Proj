@@ -14,7 +14,7 @@
 
     require_once(__DIR__ . '/../templates/browse.tpl.php');
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawBrowse($db, intval($_GET['id']));
     drawFooter();
 ?>

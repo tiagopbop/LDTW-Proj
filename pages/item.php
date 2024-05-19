@@ -13,7 +13,7 @@
 
     $db = getDatabaseConnection();
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawItem($db, intval($_GET['id']),6);
     drawFooter();
 ?>

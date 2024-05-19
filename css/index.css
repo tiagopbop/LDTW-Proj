@@ -52,12 +52,22 @@ a {
   left: 82vw;
 }
 
+.admin {
+  width: 7vw;
+  left: 27vw;
+}
+
 .messages {
   width: 6vw;
   left: 70.2vw;
 }
 
-.home:hover,.login:hover,.register:hover,.messages:hover {
+.addCat {
+  width: 9vw;
+  left: 35vw;
+}
+
+.home:hover,.login:hover,.register:hover,.messages:hover,.admin:hover,.addCat:hover {
   background-color: rgba(61, 61, 61, 0.5);
 }
 

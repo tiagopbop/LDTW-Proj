@@ -9,7 +9,7 @@
     
     require_once(__DIR__ . '/../templates/login.tpl.php');
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawLogIn();
     drawFooter();
 ?>

@@ -18,7 +18,7 @@ function getImageById($db, $VehicleId) {
 }
 ?>
 
-<?php function drawHeader($session) { ?>
+<?php function drawHeader($session, $user) { ?>
     <!DOCTYPE html>
     <html lang="en-US">
     <head>
@@ -35,6 +35,9 @@ function getImageById($db, $VehicleId) {
                 <a class="nav messages" href="../pages/messages.php">Messages</a>
                 <a class="cart trans" href="../pages/cart.php"></a>
                 <img class="cart unhovered" src="../docs/shopping_cart_icon.png" alt="Cart">
+                <?php
+                    if ($user->UserId != NULL && $user->is_admin == 1) adminTrue();
+                ?>
                 <?php
                     if (!$session->isLoggedIn()) logInFalse();
                     else logInTrue();
@@ -121,4 +124,9 @@ function drawResto($db, $vehicles) {
 <?php function logInTrue() { ?>
     <a class="nav login" href="../pages/create_listing.php">Add item</a>
     <a class="nav register" href="../pages/profile.php">Profile</a>
+<?php } ?>
+
+<?php function adminTrue() { ?>
+    <a class="nav admin" href="../pages/createAdmin.php">Give admin</a>
+    <a class="nav addCat" href="../pages/addCat.php">Add new category</a>
 <?php } ?>

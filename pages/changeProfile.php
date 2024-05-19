@@ -11,7 +11,7 @@
 
     require_once(__DIR__ . '/../templates/changeProfile.tpl.php');
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawProfileUpdate($currentUser);
     drawFooter();
 ?>

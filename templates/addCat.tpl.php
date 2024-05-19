@@ -14,7 +14,7 @@ function drawCreateListing(array $listing, array $brands, array $colors)
 ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/addCat.css" rel="stylesheet">
+    <link href="../css/selling.css" rel="stylesheet">
 
 <div class="wall">
     <form action="../actions/action_create_listing.php" method="post" enctype="multipart/form-data">

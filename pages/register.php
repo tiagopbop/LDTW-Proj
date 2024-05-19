@@ -13,7 +13,7 @@
 
     require_once(__DIR__ . '/../templates/register.tpl.php');
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawRegister();
     drawFooter();
 ?>

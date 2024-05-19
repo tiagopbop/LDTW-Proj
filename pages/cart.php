@@ -27,7 +27,7 @@
     }
 
 
-    drawHeader($session);
+    drawHeader($session, $user);
     drawCart($db, $vehicles);
     drawFooter();
 ?>
