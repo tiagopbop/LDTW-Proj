@@ -3,16 +3,16 @@
 
     
     class User {
-        public int $userId;
+        public int $UserId;
         public string $userName;
         public string $named;
         public string $pass;
         public string $email;
-        public bool $is_admin;
+        public int $is_admin;
     
 
-        public function __construct(int $userId, string $userName,string $named, string $pass, string $email, bool $is_admin) {
-            $this->userId = $userId;
+        public function __construct(int $UserId, string $userName,string $named, string $pass, string $email, int $is_admin) {
+            $this->UserId = $UserId;
             $this->userName = $userName;
             $this->pass = $pass;
             $this->email = $email;
@@ -21,13 +21,13 @@
         }
 
         public function giveAdmin($db) {
-            $stmt = $db->prepare('UPDATE User SET is_admin = 1 WHERE userId = ?');
+            $stmt = $db->prepare('UPDATE User SET is_admin = 1 WHERE UserId = ?');
 
-            $stmt->execute(array($this->is_admin, $this->userId));
+            $stmt->execute(array($this->is_admin, $this->UserId));
         }
 
         static function getUserWithPassword(PDO $db, string $email, string $userName, string $pass) : ?User {
-            $stmt = $db->prepare(' SELECT userId, userName,named, pass, email, is_admin, creattion_date
+            $stmt = $db->prepare(' SELECT UserId, userName,named, pass, email, is_admin, creattion_date
             FROM User
             WHERE lower(email) = ? AND userName = ? AND pass = ? ');
   
@@ -35,7 +35,7 @@
     
             if ($user = $stmt->fetch()) {
                 return new User(
-                    $user['userId'],
+                    $user['UserId'],
                     $user['userName'],
                     $user['named'],
                     $user['pass'],
@@ -47,21 +47,20 @@
         }
 
         static function getUser (PDO $db, int $id) : ?User {
-            $stmt = $db->prepare(' SELECT userId, userName,named, pass, email, is_admin, creattion_date
+            $stmt = $db->prepare(' SELECT UserId, userName,named, pass, email, is_admin, creattion_date
             FROM User
-            WHERE userId = ? ');
+            WHERE UserId = ? ');
 
             $stmt->execute(array($id));
             $user = $stmt->fetch();
 
             return new User(
-                $user['userId'],
+                $user['UserId'],
                 $user['userName'],
                 $user['named'],
                 $user['pass'],
                 $user['email'],
                 $user['is_admin'],
-                $user['creattion_date'],
             );
         }
     }

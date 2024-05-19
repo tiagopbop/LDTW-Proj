@@ -4,14 +4,16 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    //require_once(__DIR__ . '/../database/connection.db.php');
+    require_once(__DIR__ . '/../database/connection.php');
     require_once(__DIR__ . '/../database/user.class.php');
     
     require_once(__DIR__ . '/../templates/common.php');
 
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
+    $db = getDatabaseConnection();
+
     drawHeader($session);
-    drawItem();
+    drawItem($db, intval($_GET['id']));
     drawFooter();
 ?>

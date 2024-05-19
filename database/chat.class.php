@@ -7,7 +7,7 @@ class Chat {
     public int $sellerId;
 
 
-    public function __construct(int $chat, int $buyerId, int $sellerId) {
+    public function __construct(int $chatId, int $buyerId, int $sellerId) {
         $this->chatId = $chatId;
         $this->buyerId = $buyerId;
         $this->sellerId = $sellerId;

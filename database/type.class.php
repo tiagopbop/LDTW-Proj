@@ -3,7 +3,7 @@
     declare(strict_types = 1);
 
     class Types {
-        public int $typeID;
+        public int $typeId;
         public string $typeName;
         public int $categoryId;
     
