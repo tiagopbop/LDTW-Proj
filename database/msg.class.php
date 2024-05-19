@@ -15,21 +15,18 @@ class Msg {
         $this->text_message = $text_message;
     }
 
-    public static function getMessagesByChatId(PDO $db, int $chatId): array {
-        $stmt = $db->prepare('SELECT * FROM Msg WHERE chatId = ? ORDER BY when_sent DESC');
-        $stmt->execute([$chatId]);
-        
-        $messages = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $messages[] = new Msg(
-                $row['chatId'],
-                $row['userId'],
-                $row['when_sent'],
-                $row['text_message']
-            );
+    public static function getChatByIds(PDO $db, int $buyerId, int $sellerId): ?int {
+        try {
+            $stmt = $db->prepare("SELECT ChatId FROM Chat WHERE (BuyerId = :buyer_id AND SellerId = :seller_id) OR (BuyerId = :seller_id AND SellerId = :buyer_id)");
+            $stmt->bindValue(':buyer_id', $buyerId, PDO::PARAM_INT);
+            $stmt->bindValue(':seller_id', $sellerId, PDO::PARAM_INT);
+            $stmt->execute();
+            $chatId = $stmt->fetchColumn();
+            return $chatId ? (int) $chatId : null;
+        } catch (PDOException $e) {
+            // Handle the exception as per your application's error handling strategy
+            return null;
         }
-        
-        return $messages;
     }
 }
 ?>

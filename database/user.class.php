@@ -64,5 +64,15 @@
                 $user['creattion_date'],
             );
         }
+        public static function getUsers($db) {
+            try {
+                $stmt = $db->query("SELECT * FROM User");
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $users;
+            } catch (PDOException $e) {
+                // Handle the exception as per your application's error handling strategy
+                return [];
+            }
+        }
     }
 ?>
