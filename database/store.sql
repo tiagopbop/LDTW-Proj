@@ -146,7 +146,10 @@ VALUES
     (2,'jane_smith', 'joana', 'pass123', 'jane@example.com', 0),
     (3,'alex_brown', 'alexandre', 'securepass', 'alex@example.com', 0),
     (4,'emma_davis', 'emilia', 'password', 'emma@example.com', 0),
-    (5,'michael_wilson', 'micael', 'p@$$w0rd', 'michael@example.com', 0);
+    (5,'michael_wilson', 'micael', 'p@$$w0rd', 'michael@example.com', 0),
+    (9,'admin','admin','$2y$10$7nTkVcUvM6d7HG6YTyYKsOdqq/.tM/Mxon1/lt6riiD82YEYwCs62''admin@gmail.com',1);
+
+
 
 INSERT INTO Brand (BrandId, BrandName, logoFilePath) 
 VALUES 
@@ -155,6 +158,7 @@ VALUES
     (3, 'Ford', '/path/to/ford_logo.png'),
     (4, 'Chevrolet', '/path/to/chevrolet_logo.png'),
     (5, 'BMW', '/path/to/bmw_logo.png');
+    
 
 INSERT INTO Category (categoryId, categoryName, categoryFilePath) 
 VALUES 
