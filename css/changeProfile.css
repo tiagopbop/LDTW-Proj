@@ -1,0 +1,85 @@
+html {
+    height: 100vh;
+  }
+  
+  .logoinv {
+    width: 8vw;
+    border-radius: 0.25vw;
+  }
+  
+  section {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vw;
+    border-radius: 0.9vh;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    position: absolute;
+    top: 20vh;
+    left: 37vw;
+    height: 54vh;
+  }
+  
+  .input-wrapper {
+    width: 21vw;
+    position: relative;
+  }
+
+  .pfp {
+    width: 5vw;
+  }
+  
+  .input-wrapper input {
+    width: 19.5vw;
+    padding: 0.65vw 1.5vw 0.55vw 0.55vw;
+    border-radius: 0.9vh;
+    border: 0.2vh solid rgba(39, 40, 41, 0.6);
+    font-size: 0.9vw;
+    outline: none;
+    transition: all 0.35s ease-out;
+  }
+  
+  .input-wrapper span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.8vw;
+    color: rgba(39, 40, 41, 0.6);
+    pointer-events: none;
+    transition: all 0.35s ease-out;
+  }
+  
+  button {
+    font-weight: bold;
+    position: absolute;
+    top: 0.2vh;
+    right: -0.4vw;
+    font-size: 4vh;
+    border: none;
+    background: none;
+    color: rgba(39, 40, 41, 0.6);
+    cursor: pointer;
+  }
+  
+  .input-wrapper input:focus ~ span, .input-wrapper input:valid ~ span {
+    transform: translateY(-1.4vh) translateX(-0.3vw);
+    font-size: 0.6vw;
+    color: rgba(146, 1, 1, 0.6);
+    transition: all 0.25s ease-in;
+  }
+  
+  .input-wrapper input:focus ~ button, .input-wrapper input:valid ~ button {
+    color: rgba(146, 1, 1, 0.6);
+    transition: all 0.25s ease-in;
+  }
+  
+  .input-wrapper input:focus {
+    outline: 0.4vh solid rgba(146, 1, 1, 0.6);
+    transition: all 0.15s ease-in;
+  }
+  
+  footer {
+    bottom: 0vh;
+  }
