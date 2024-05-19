@@ -13,7 +13,13 @@ function drawCreateListing(array $listing, array $brands, array $colors)
 {
 ?>
 
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/selling.css" rel="stylesheet">
+    <title>BlazeDrive</title>
+    <link rel="icon" type="image/x-icon" href="../docs/favicon.ico">
+</head>
 <form action="../actions/action_create_listing.php" method="post" enctype="multipart/form-data">
     <label for="category">Select Category:</label>
     <select name="category" id="category">
