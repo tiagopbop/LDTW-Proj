@@ -210,5 +210,35 @@
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return $row['vehicleCount'];
         }
+
+        static function getTypeVehicles(PDO $db, int $id) : array {
+                $stmt = $db->prepare('SELECT VehicleId, Vehicle.UserId, Vehicle.typeId, Vehicle.BrandId, Vehicle.modelId, Vehicle.colorId, Vehicle.price, Vehicle.condition, Vehicle.kilometers, Vehicle.fueltype 
+                      FROM Vehicle 
+                      JOIN Types ON Vehicle.typeId = Types.typeId
+                      WHERE Types.categoryId = ?');
+
+            $stmt->execute(array($id));
+        
+            $vehicles = [];
+        
+            while ($vehicle = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $vehicles[] = new Vehicle(
+                    $vehicle['VehicleId'],
+                    $vehicle['UserId'],
+                    $vehicle['typeId'],
+                    $vehicle['BrandId'],
+                    $vehicle['modelId'],
+                    $vehicle['colorId'],
+                    $vehicle['price'],
+                    $vehicle['condition'],
+                    $vehicle['kilometers'],
+                    $vehicle['fuelType']
+                );
+            }
+        
+            return $vehicles;
+        }
+        
+
     }
 ?>

@@ -39,16 +39,6 @@ function getImageById($db, $VehicleId) {
                     if (!$session->isLoggedIn()) logInFalse();
                     else logInTrue();
                 ?>
-                <script>
-                var input = document.getElementById("myInput");
-                input.addEventListener("keyup", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    document.getElementById("myBtn").click();
-                    console.log(inputText)
-                }
-                });
-                </script>
         </header>
 <?php } ?>
 
@@ -59,19 +49,19 @@ function drawResto($db, $vehicles) {
     <section>
         <div class="decoration terra"></div>
         <div class="vehicles terrain white"></div>
-        <a class="vehicles terrain trans" href="../pages/browse.php"></a>
+        <a class="vehicles terrain trans" href="../pages/browse.php?id=1"></a>
         <img class="vehicles terrain car" src="../docs/Terrain.jpg" alt="Terrain">
     </section>
     <section>
         <div class="decoration aqua"></div>
         <div class="vehicles aquatic white"></div>
-        <a class="vehicles aquatic trans" href="../pages/browse.php"></a>
+        <a class="vehicles aquatic trans" href="../pages/browse.php?id=2"></a>
         <img class="vehicles aquatic boat" src="../docs/Aquatic.jpg" alt="Aquatic">
     </section>
     <section>
         <div class="decoration air"></div>
         <div class="vehicles aerial white"></div>
-        <a class="vehicles aerial trans" href="../pages/browse.php"></a>
+        <a class="vehicles aerial trans" href="../pages/browse.php?id=3"></a>
         <img class="vehicles aerial plane" src="../docs/Aerial.jpg" alt="Aerial">
     </section>
     <div class="popup">TRENDING</div>
