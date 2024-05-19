@@ -41,13 +41,12 @@
                     $user['pass'],
                     $user['email'],
                     $user['is_admin'],
-                    $user['creattion_date'],
                 );
             } else return null;
         }
 
         static function getUser (PDO $db, int $id) : ?User {
-            $stmt = $db->prepare(' SELECT UserId, userName,named, pass, email, is_admin, creattion_date
+            $stmt = $db->prepare(' SELECT UserId, userName,named, pass, email, is_admin
             FROM User
             WHERE UserId = ? ');
 
